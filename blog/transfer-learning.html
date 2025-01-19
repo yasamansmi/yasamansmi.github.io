@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes on Transfer Learning</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+        ul {
+            margin-left: 20px;
+            list-style-type: disc;
+        }
+        p {
+            margin: 10px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>Notes on Transfer Learning</header>
+
+    <div class="container">
+        <h2>Key Concepts</h2>
+        <p><strong>Fine-tuning:</strong> Isolate specific layers for retraining.</p>
+        <p>Two types of layers:</p>
+        <ul>
+            <li>Frozen layers</li>
+            <li>Modifiable layers</li>
+        </ul>
+        <p><strong>Benefits:</strong> Saves training time and doesn't require lots of data.</p>
+
+        <h2>When to Use Transfer Learning</h2>
+        <ul>
+            <li>Lack of training data</li>
+            <li>Existing network is available</li>
+            <li>Same input for task 1 and task 2</li>
+        </ul>
+
+        <h2>Representation Learning</h2>
+        <p>Finding the best representation of the problem to reduce data with new features.</p>
+
+        <h2>Model Example</h2>
+        <p><strong>Inception-v3 model</strong></p>
+
+        <h2>Definition</h2>
+        <p><strong>Transfer Learning:</strong> Involves reusing a model.</p>
+    </div>
+
+    <footer>&copy; 2025 Your Name</footer>
+</body>
+</html>
