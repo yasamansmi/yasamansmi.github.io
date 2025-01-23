@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Attention Models</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #444;
+        }
+        .diagram {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            font-size: 0.9em;
+        }
+        .reference {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .reference a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .reference a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Understanding Attention Models</h1>
+        <p>
+            Attention models address the problem of handling long sequences in machine learning tasks. Traditional encoder-decoder models perform well for short sentences, but they struggle to memorize the entire context of long sentences.
+        </p>
+        
+        <div class="diagram">
+            <img src="pictures/attention/attention-diagram.webp" alt="Attention model diagram" width="600">
+            <p>Basic encoder-decoder architecture.</p>
+        </div>
+
+        <h2>The Problem with Long Sentences</h2>
+        <p>
+            BLEU scores, a metric to evaluate machine translation models, tend to decrease as sentence length increases. This indicates that traditional approaches fail to maintain context effectively for longer inputs.
+        </p>
+
+        <div class="diagram">
+            <img src="pictures/attention/Sentence-length.png" alt="BLEU score vs sentence length" width="600">
+            <p>BLEU scores decrease with sentence length.</p>
+        </div>
+
+        <h2>Introducing Attention Mechanism</h2>
+        <p>
+            Recurrent Neural Networks (RNNs) generate one word at a time. At each step, attention weights (denoted as <code>α<sub>t</sub></code>) determine the importance of each input word for the current output word. This mechanism allows the model to focus on relevant parts of the input sequence.
+        </p>
+
+        <div class="diagram">
+            <img src="pictures/attention/attention-weights.png" alt="Attention weights calculation" width="600">
+            <p>Attention weights in an RNN.</p>
+        </div>
+
+        <h3>Bidirectional RNNs</h3>
+        <p>
+            Bidirectional RNNs (including GRU and LSTM) are commonly used to improve attention-based systems. They process the input sequence in both forward and backward directions, providing a more comprehensive context.
+        </p>
+
+        <div class="diagram">
+            <img src="pictures/attention/bidirectional-rnn.png" alt="Bidirectional RNN structure" width="600">
+            <p>Bidirectional RNN architecture.</p>
+        </div>
+
+        <h2>Computing Attention Weights</h2>
+        <p>
+            Attention weights are calculated using the softmax function to ensure they sum to 1. The context vector <code>C<sub>t</sub></code> is then computed as a weighted sum of the input states.
+        </p>
+
+        <p>Formula for attention weights:</p>
+        <pre><code>α<sub>t,t'</sub> = exp(e<sub>t,t'</sub>) / Σ exp(e<sub>t,t'</sub>)</code></pre>
+
+        <p>Formula for context vector:</p>
+        <pre><code>C<sub>t</sub> = Σ α<sub>t,t'</sub> * a<sub>t'</sub></code></pre>
+
+        <h3>Training and Cost</h3>
+        <p>
+            Implementing this model and training it with gradient descent ensures effectiveness, but it comes with a quadratic computational cost due to the pairwise attention calculations.
+        </p>
+
+        <div class="reference">
+            <p>Reference:</p>
+            <a href="https://www.coursera.org/lecture/nlp-sequence-models/attention-model-lSwVa" target="_blank">
+                Coursera: NLP Sequence Models - Attention Model
+            </a>
+        </div>
+    </div>
+</body>
+</html>
