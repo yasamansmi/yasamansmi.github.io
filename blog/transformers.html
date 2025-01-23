@@ -4,32 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Understanding Transformers, Embeddings, and Neural Network Fundamentals</title>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
     <h1>Understanding Transformers, Embeddings, and Neural Network Fundamentals</h1>
 
+    <p>Machine learning and neural networks are fundamental to the advancements in artificial intelligence today. From powering chatbots to enabling personalized recommendations, these technologies have transformed the way we interact with data. This blog provides an overview of some critical components of these systems, including transformers, embeddings, and neural network mechanics, in a simplified manner that can benefit both beginners and enthusiasts looking to deepen their understanding.</p>
+
     <h2>Transformers</h2>
-    <p>Transformers revolutionized the machine learning field by moving away from procedural methods. Instead of step-by-step instructions, they establish flexible structures capable of learning through examples. This adaptability allows them to excel in tasks like natural language processing.</p>
+    <p>Transformers revolutionized the machine learning field by moving away from procedural methods. Instead of step-by-step instructions, they establish flexible structures capable of learning through examples. This adaptability allows them to excel in tasks like natural language processing (NLP), where understanding the context and relationships between words is crucial.</p>
+
+    <p>Introduced in the paper "Attention Is All You Need" (Vaswani et al., 2017), transformers utilize self-attention mechanisms to weigh the importance of each part of the input relative to the others. This allows them to handle long-range dependencies effectively, a significant improvement over previous architectures like RNNs and LSTMs.</p>
 
     <h2>Linear Regression</h2>
     <p>Linear regression is one of the foundational algorithms in machine learning. It works by determining parameters (weights) that minimize the difference between the predicted and actual data. Mathematically:</p>
-    <p>\\( f(x) = w_1x_1 + w_2x_2 + \\dots + w_nx_n \\)</p>
+    <p>\( f(x) = w_1x_1 + w_2x_2 + \dots + w_nx_n \)</p>
+    <p>Despite its simplicity, linear regression serves as a stepping stone to more advanced techniques like logistic regression and generalized linear models. It also forms the basis for understanding optimization concepts used in training complex machine learning models.</p>
 
     <h2>Deep Learning and Neural Networks</h2>
+    <p>Deep learning models are at the core of many state-of-the-art AI systems. These models scale well for large datasets and use backpropagation as their core training algorithm. Neural networks are built upon layers of interconnected nodes, or neurons, where each connection has a weight that adjusts during training.</p>
     <ul>
         <li><strong>Inputs:</strong> Represented as arrays of real numbers (organized as tensors).</li>
+        <li><strong>Hidden Layers:</strong> Extract patterns and features from the input data.</li>
         <li><strong>Final Layer:</strong> Outputs a probability distribution for predictions.</li>
     </ul>
 
     <h2>Weighted Sums in Neural Networks</h2>
     <p>Weighted sums form the basis of neural networks:</p>
-    <p>\\[
-    v = \\begin{bmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{bmatrix}, \\quad
-    w = \\begin{bmatrix} w_1 \\\\ w_2 \\\\ \\vdots \\\\ w_n \\end{bmatrix}, \\quad
-    v \\cdot w = v_1w_1 + v_2w_2 + \\dots + v_nw_n
-    \\]</p>
-    <p>Weights define the model, while the data vectors represent the input processed through the network.</p>
+    <p>\[
+    v = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}, \quad
+    w = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{bmatrix}, \quad
+    v \cdot w = v_1w_1 + v_2w_2 + \dots + v_nw_n
+    \]</p>
+    <p>Weights define the model, while the data vectors represent the input processed through the network. By adjusting these weights during training, the model learns to map inputs to outputs effectively.</p>
 
     <h2>Embedding Matrix</h2>
     <p>Embeddings transform words into numerical vectors, enabling models to understand relationships between words. An embedding matrix maps words to vector representations:</p>
@@ -41,40 +48,44 @@
     <h3>Embedding Arithmetic</h3>
     <p>Embeddings capture semantic relationships between words:</p>
     <ul>
-        <li>\\( E(\\text{queen}) - E(\\text{woman}) \\approx E(\\text{king}) - E(\\text{man}) \\)</li>
-        <li>\\( E(\\text{Hitler}) + E(\\text{Italy}) - E(\\text{Germany}) \\approx E(\\text{Mussolini}) \\)</li>
-        <li>\\( E(\\text{sushi}) + E(\\text{Germany}) - E(\\text{Japan}) \\approx E(\\text{bratwurst}) \\)</li>
+        <li>\( E(\text{queen}) - E(\text{woman}) \approx E(\text{king}) - E(\text{man}) \)</li>
+        <li>\( E(\text{Hitler}) + E(\text{Italy}) - E(\text{Germany}) \approx E(\text{Mussolini}) \)</li>
+        <li>\( E(\text{sushi}) + E(\text{Germany}) - E(\text{Japan}) \approx E(\text{bratwurst}) \)</li>
     </ul>
+    <p>This property of embeddings enables models to perform analogy reasoning and understand complex relationships in data.</p>
 
     <h2>Plurality Direction</h2>
     <p>The concept of plurality in embeddings can be expressed as:</p>
-    <p>\\( \\text{plural} = E(\\text{cats}) - E(\\text{cat}) \\)</p>
-    <p>This vector represents the plurality direction in the semantic space.</p>
+    <p>\( \text{plural} = E(\text{cats}) - E(\text{cat}) \)</p>
+    <p>This vector represents the plurality direction in the semantic space, capturing how words change when referring to singular versus plural forms.</p>
 
     <h2>Context Size in Transformers</h2>
-    <p>The context size defines how much data flows into the transformer at once. It depends on the number of vectors the transformer can process and incorporate into its computations.</p>
+    <p>The context size defines how much data flows into the transformer at once. It depends on the number of vectors the transformer can process and incorporate into its computations. Larger context sizes enable transformers to handle more extensive sequences, which is vital for tasks like document summarization and language modeling.</p>
 
     <h2>Unembedding Matrix</h2>
-    <p>The unembedding matrix maps outputs back into probabilities over the vocabulary. It has dimensions \\( n_{vocab} \\times d_{embed} \\).</p>
+    <p>The unembedding matrix maps outputs back into probabilities over the vocabulary. It has dimensions \( n_{vocab} \times d_{embed} \). This is a critical step in tasks like text generation, where the model predicts the next word based on learned probabilities.</p>
 
     <h2>Softmax Function</h2>
     <p>Softmax converts logits into probabilities, ensuring they sum to one:</p>
-    <p>\\[
-    \\text{softmax}(x_i) = \\frac{e^{x_i}}{\\sum_{n=0}^{N-1} e^{x_n}}
-    \\]</p>
+    <p>\[
+    \text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{n=0}^{N-1} e^{x_n}}
+    \]</p>
 
     <h3>Softmax with Temperature</h3>
-    <p>\\[
-    \\text{softmax}\\left(\\frac{x_i}{T}\\right)
-    \\]</p>
+    <p>\[
+    \text{softmax}\left(\frac{x_i}{T}\right)
+    \]</p>
     <ul>
-        <li><strong>Higher Temperature (T):</strong> Gives more weight to lower probability values.</li>
-        <li><strong>Lower Temperature (T):</strong> Focuses more on higher probability values.</li>
+        <li><strong>Higher Temperature (T):</strong> Gives more weight to lower probability values, generating more diverse outputs.</li>
+        <li><strong>Lower Temperature (T):</strong> Focuses more on higher probability values, generating more deterministic outputs.</li>
     </ul>
 
     <h2>Inputs to Outputs</h2>
-    <p>In neural networks, inputs are converted to logits, which are then transformed into probabilities through softmax.</p>
+    <p>In neural networks, inputs are converted to logits, which are then transformed into probabilities through softmax. This final step allows models to make predictions that can be interpreted and acted upon.</p>
 
-    <p>By breaking down these concepts, we can better appreciate the elegance of neural networks and their capabilities in solving real-world challenges.</p>
+    <p>By breaking down these concepts, we can better appreciate the elegance of neural networks and their capabilities in solving real-world challenges. Whether you're a beginner or an experienced practitioner, understanding these fundamentals is key to leveraging the power of machine learning.</p>
+    <h2>Further Reading</h2>
+    <p>If you want to explore these topics in greater depth, I highly recommend the blog and videos by <a href="https://3blue1brown.com/" target="_blank">3Blue1Brown</a>. Their visual and intuitive explanations provide a fantastic way to grasp complex mathematical and machine learning concepts.</p>
 </body>
 </html>
+
