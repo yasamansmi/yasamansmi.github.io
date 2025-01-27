@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding PPO in Reinforcement Learning</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Understanding PPO in Reinforcement Learning</h1>
+
+    <p>Proximal Policy Optimization (PPO) is a popular algorithm in reinforcement learning (RL), used to solve sequential decision-making problems. It is designed to improve upon prior policy gradient methods by providing a stable and efficient way to train RL models.</p>
+
+    <h2>Why PPO?</h2>
+    <p>In RL, the training data distribution is highly dependent on the current policy. This introduces challenges like:</p>
+    <ul>
+        <li><strong>Data instability:</strong> Rewards and observations may change drastically as the policy evolves.</li>
+        <li><strong>Policy collapse:</strong> Large policy updates can destabilize training, leading to poor performance.</li>
+    </ul>
+
+    <h2>Core PPO Objective</h2>
+    <p>PPO introduces the concept of a <em>clipped surrogate objective</em> to restrict updates to the policy:</p>
+    <p>
+    \[
+    L^{CLIP}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t \right) \right]
+    \]</p>
+    <p>Here:</p>
+    <ul>
+        <li>\(r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}\) is the probability ratio of the new and old policies.</li>
+        <li>\(A_t\) is the advantage function, measuring how much better the chosen action is compared to the baseline.</li>
+        <li>\(\epsilon\) is a hyperparameter controlling the extent of clipping.</li>
+    </ul>
+
+    <h2>Mathematical Foundations</h2>
+    <p>The PPO algorithm builds upon several key concepts:</p>
+
+    <h3>Policy Gradient Loss</h3>
+    <p>The policy gradient loss is defined as:</p>
+    <p>\[
+    L^{PG}(\theta) = \mathbb{E}_t \left[ \log \pi_\theta(a_t|s_t) A_t \right]
+    \]</p>
+    <p>Here, \(A_t\) represents the advantage function, which is calculated as:</p>
+    <p>\[
+    A_t = \sum_{k=0}^{T} \gamma^k r_{t+k} - V(s_t)
+    \]</p>
+    <p>Where:</p>
+    <ul>
+        <li>\(\gamma\) is the discount factor.</li>
+        <li>\(r_t\) is the reward at time \(t\).</li>
+        <li>\(V(s_t)\) is the baseline value function.</li>
+    </ul>
+
+    <h3>Value Function</h3>
+    <p>The value function approximates the expected return from a given state:</p>
+    <p>\[
+    V(s_t) = \mathbb{E}[R_t|s_t]
+    \]</p>
+    <p>Where \(R_t\) is the discounted return:</p>
+    <p>\[
+    R_t = \sum_{k=0}^{T} \gamma^k r_{t+k}
+    \]</p>
+
+    <h2>Clipped Objective</h2>
+    <p>The clipped surrogate objective is designed to stabilize training:</p>
+    <p>\[
+    L^{CLIP}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t \right) \right]
+    \]</p>
+
+    <h3>Illustration of Clipping</h3>
+    <p>The figure below visualizes the clipping mechanism for positive (\(A > 0\)) and negative (\(A < 0\)) advantages:</p>
+    <img src="pictures/RL/surrogate-function.png" alt="PPO Clipped Objective Illustration">
+
+    <h2>PPO vs TRPO</h2>
+    <p>While Trust Region Policy Optimization (TRPO) and PPO are similar in purpose, PPO simplifies the process by avoiding complex constraints. The clipping mechanism in PPO ensures that the policy updates remain within a stable region without the computational overhead of TRPO.</p>
+
+    <h2>Final Loss Function</h2>
+    <p>The final loss function in PPO combines multiple terms:</p>
+    <p>\[
+    L_t^{PPO}(\theta) = \mathbb{E}_t \left[ L_t^{CLIP}(\theta) - c_1 L_t^{VF}(\theta) + c_2 S[\pi_\theta](s_t) \right]
+    \]</p>
+    <ul>
+        <li>The first additional term \(L_t^{VF}(\theta)\) measures the error in the value function (mean squared error).</li>
+        <li>The second term \(S[\pi_\theta](s_t)\) is an entropy term to encourage exploration.</li>
+    </ul>
+    <p>\[
+    H(\pi) = -\sum_i p_i \log_2(p_i)
+    \]</p>
+    <p>Here, entropy measures the unpredictability of the policy's outcome, ensuring diverse action selection.</p>
+
+    <p>\(c_1\) and \(c_2\) are hyperparameters controlling the contributions of the value function and entropy terms.</p>
+
+    <h2>Further Reading and References</h2>
+    <p>Here are some valuable resources to dive deeper into PPO:</p>
+    <ul>
+        <li><a href="https://arxiv.org/abs/1707.06347">PPO Paper: "Proximal Policy Optimization Algorithms"</a></li>
+        <li><a href="https://www.youtube.com/watch?v=5P7I-xPq8u8">Video Explanation by OpenAI</a></li>
+        <li>Schulman, J., et al. "Trust Region Policy Optimization." <a href="https://arxiv.org/abs/1502.05477">TRPO Paper</a></li>
+        <li><a href="https://www.youtube.com/channel/UC3vXwS3GgWhyTNBL4uVgQDQ">Arxiv Insights YouTube Channel</a></li>
+    </ul>
+
+    <h2>To Be Continued...</h2>
+    <p>This article is a work in progress and will be updated with more details on PPO, including practical implementation tips and examples.</p>
+</body>
+</html>
