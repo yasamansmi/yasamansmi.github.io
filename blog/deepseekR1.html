@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek R1</title>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>DeepSeek R1</h1>
+    
+    <h2>Introduction</h2>
+    <p>DeepSeek R1 is a large language model developed by DeepSeek AI. It is designed for advanced reasoning tasks, including mathematical problem-solving and coding. Unlike traditional models, DeepSeek R1 combines supervised fine-tuning (SFT) with reinforcement learning (RL) using the Grouped Relative Policy Optimization (GRPO) algorithm. This hybrid approach enables structured reasoning and improved decision-making.</p>
+    
+    <h2>DeepSeek R1M</h2>
+    <p>DeepSeek R1M builds upon DeepSeek R1 but introduces:</p>
+    <ul>
+        <li>A gold-standard dataset</li>
+        <li>A multi-stage reinforcement learning process</li>
+    </ul>
+    <p>It also incorporates smaller models like Qwen and Llama.</p>
+    
+    <h2>Training Process</h2>
+    <ol>
+        <li>Uses <strong>Grouped Relative Policy Optimization (GRPO)</strong> to train models without needing a critic model.</li>
+        <li>Relies on rewards for structured format and accuracy, using matrix \( A \) as a consistency measure.</li>
+    </ol>
+    
+    <h2>Core Concept Behind DeepSeek R1</h2>
+    <p>Instead of using supervised fine-tuning alone, the model learns through reinforcement learning. It adapts its policy through:</p>
+    <ul>
+        <li><strong>Chain of Thought (CoT)</strong>: Encouraging the model to think step-by-step.</li>
+        <li><strong>Reinforcement Learning</strong>: Rewarding good decisions.</li>
+        <li><strong>Model Distillation</strong>: Training smaller models to perform similarly to larger ones.</li>
+    </ul>
+    
+    <h2>Algorithm: GRPO</h2>
+    <p>Grouped Relative Policy Optimization (GRPO) is a reinforcement learning method designed to stabilize policy updates. The formula for GRPO is:</p>
+    <p><img src="pictures/deepseek/GRPO.png" alt="GRPO Formula" style="max-width: 80%; height: auto;"></p>
+    
+    <h2>Understanding the A Matrix</h2>
+    <p>The A matrix, also known as the advantage function, measures how beneficial an action is compared to the expected value. It is defined as:</p>
+    <p>
+        \[ A_t = Q(s_t, a_t) - V(s_t) \]
+    </p>
+    <ul>
+        <li><strong>Q(s_t, a_t)</strong>: Expected return (reward) when taking action \( a_t \) at state \( s_t \).</li>
+        <li><strong>V(s_t)</strong>: Baseline value function estimating the expected return of being in state \( s_t \) without considering a specific action.</li>
+    </ul>
+    <p>This helps adjust decisions dynamically, optimizing rewards while maintaining stability.</p>
+    
+    <h2>Distillation Process</h2>
+    <p>To improve efficiency, DeepSeek R1 uses knowledge distillation, where smaller models learn from larger models, enabling performance retention while reducing computational costs.</p>
+    
+    <h2>Trajectory-Based Learning</h2>
+    <p>A trajectory is a sequence of actions a model has taken. Reinforcement learning updates policies based on successful trajectories, favoring actions that lead to better rewards.</p>
+    
+    <h2>Advantage Term in DeepSeek R1</h2>
+    <p>Each log probability in the model is weighted by an advantage term, ensuring better decision-making.</p>
+    
+    <h3>Kullback-Leibler (KL) Divergence</h3>
+    <p>KL divergence is used to measure the difference between probability distributions:</p>
+    <p>
+        \[ D_{KL}(\pi_{\theta} || \pi_{\text{ref}}) = \frac{\pi_{\text{ref}}(o_i | q)}{\pi_{\theta}(o_i | q)} - \log \frac{\pi_{\text{ref}}(o_i | q)}{\pi_{\theta}(o_i | q)} - 1 \]
+    </p>
+    <p>This prevents reward hacking and excessive deviation from the reference model.</p>
+    
+    <h2>Conclusion</h2>
+    <p>DeepSeek R1 represents a significant advancement in AI, integrating supervised fine-tuning and reinforcement learning to enhance reasoning capabilities. Its structured training approach enables high-quality responses, making it a powerful model for complex problem-solving.</p>
+    
+    <h2>References</h2>
+    <ul>
+        <li><a href="https://www.youtube.com/watch?v=kv8frWeKoeo" target="_blank">DeepSeek R1 Explained to your grandma - YouTube</a></li>
+        <li><a href="https://www.youtube.com/watch?v=XMnxKGVnEUc" target="_blank">Paper: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning - YouTube</a></li>
+        <li><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf" target="_blank">DeepSeek R1 Paper</a></li>
+    </ul>
+    
+    <h2>To Be Continued...</h2>
+    <p>This is just the beginning of the DeepSeek R1 exploration. Stay tuned for further insights and developments!</p>
+</body>
+</html>
