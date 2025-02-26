@@ -3,105 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding PPO in Reinforcement Learning</title>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Yasaman Samiee</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+        }
+        .left-column {
+            width: 25%;
+            background-color: #f4f4f4;
             padding: 20px;
+            box-sizing: border-box;
+        }
+        .right-column {
+            width: 75%;
+            padding: 20px;
+            box-sizing: border-box;
         }
         img {
-            max-width: 100%;
-            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
         }
-        code {
-            background: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
+        a {
+            color: #0073b1;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Understanding PPO in Reinforcement Learning</h1>
+    <div class="left-column">
+        <img src="profile.jpeg" alt="Yasaman Samiee">
+        <h2>Yasaman Samiee</h2>
+        <p>Data Scientist passionate about machine learning, cybersecurity, and sharing knowledge.</p>
+        <p>Email: <a href="mailto:yasaman.msamiee@gmail.com">yasaman.msamiee@gmail.com</a></p>
+        <p>Phone: +1 (604) 729-1574</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/yasamansamiee/">linkedin.com/in/yasamansamiee</a></p>
+    </div>
 
-    <p>Proximal Policy Optimization (PPO) is a widely used reinforcement learning (RL) algorithm that addresses the limitations of earlier policy gradient methods. It introduces a stable and efficient way to train RL models by improving the balance between exploration and exploitation while ensuring robust updates to the policy. In this blog, we explore the core concepts, key advantages, and mathematical foundations of PPO.</p>
+    <div class="right-column">
 
-    <h2>Why PPO?</h2>
-    <p>PPO builds upon traditional policy gradient methods by addressing their instability and inefficiency. The key advantages of PPO include:</p>
-    <ul>
-        <li><strong>Stability:</strong> By introducing a clipped objective, PPO prevents large and destabilizing policy updates.</li>
-        <li><strong>Simplicity:</strong> Unlike Trust Region Policy Optimization (TRPO), PPO avoids complex constraints, making implementation straightforward.</li>
-        <li><strong>Exploration:</strong> The entropy bonus in PPO encourages diverse policy exploration to avoid suboptimal solutions.</li>
-    </ul>
 
-    <h2>Policy Gradient Loss vs PPO</h2>
-    <p>Traditional policy gradient methods optimize the policy directly by increasing the likelihood of good actions. The loss function for this is:</p>
-    <p>
-    \[
-    L^{PG}(\theta) = \mathbb{E}_t \left[ \log \pi_\theta(a_t|s_t) A_t \right]
-    \]
-    <p>However, this can lead to large, erratic updates, causing instability. PPO introduces a clipped surrogate objective to address this:</p>
-    <p>
-    \[
-    L^{CLIP}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) A_t \right) \right]
-    \]
-    <p>Here, \(r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}\) represents the probability ratio. Clipping ensures that updates remain within a stable range, improving convergence.</p>
 
-    <h2>The Value Function and Its Role</h2>
-    <p>The value function, \(V(s_t)\), is an essential component in PPO. It estimates the expected return from a given state, providing a baseline for the advantage function:</p>
-    <p>
-    \[
-    A_t = \sum_{k=0}^{T} \gamma^k r_{t+k} - V(s_t)
-    \]
-    <p>Using a baseline reduces the variance in policy gradient updates, making training more efficient. The value function is optimized with its own loss:</p>
-    <p>
-    \[
-    L_t^{VF}(\theta) = \left( R_t - V(s_t) \right)^2
-    \]
-    <p>Here, \(R_t = \sum_{k=0}^{T} \gamma^k r_{t+k}\) is the discounted return.</p>
+        <section id="cv">
+            
+            <h2>Professional Summary</h2>
+            <p>Data Scientist with extensive expertise in cybersecurity, anomaly detection, and machine learning using advanced techniques. Skilled in developing and deploying scalable models to production, with a proven track record of improving security protocols and delivering data-driven insights. Passionate about leveraging state-of-the-art tools, including NLP and reinforcement learning, to solve complex challenges and drive innovation.</p>
+            <p><a href="cv/">View My Full CV Here</a></p>
+            <h3>Work Experience</h3>
+            <ul>
+                <li><strong>Data Scientist, SecureAuth (Jan 2022 – Present)</strong></li>
+                <li><strong>Data Science Engineer, Acceptto Corporation (May 2020 – Dec 2021)</strong></li>
+                <li><strong>Data Scientist, Digikala.com (May 2020 – Dec 2020)</strong></li>
+                <li><strong>Business Intelligence Analyst, Takhfifan (Nov 2017 – Feb 2018)</strong></li>
+                <li><strong>Data Analyst, SnappFood (Oct 2016 – Apr 2017)</strong></li>
+            </ul>
 
-    <h2>Final PPO Loss Function</h2>
-    <p>The final loss function in PPO combines the clipped policy loss, the value function loss, and an entropy bonus for exploration:</p>
-    <p>
-    \[
-    L_t^{PPO}(\theta) = \mathbb{E}_t \left[ L_t^{CLIP}(\theta) - c_1 L_t^{VF}(\theta) + c_2 S[\pi_\theta](s_t) \right]
-    \]
-    <ul>
-        <li><strong>Clipped Objective:</strong> Ensures stable policy updates.</li>
-        <li><strong>Value Function Loss:</strong> Reduces the error in state value predictions.</li>
-        <li><strong>Entropy Bonus:</strong> Encourages policy exploration by maximizing the unpredictability of actions.</li>
-    </ul>
+            <h3>Skills</h3>
+            <p><strong>Technologies:</strong> Python (TensorFlow, Scikit-learn), Spark, SQL, Docker, AWS, Git.</p>
+            <p><strong>Analytics:</strong> Statistical Modeling, Machine Learning, Threat Detection, Risk Analysis, Data Visualization.</p>
+        </section>
 
-    <h3>Entropy Bonus</h3>
-    <p>The entropy term, \(S[\pi_\theta](s_t)\), is defined as:</p>
-    <p>
-    \[
-    H(\pi) = -\sum_i p_i \log_2(p_i)
-    \]
-    <p>This measures the randomness of the policy's actions, ensuring sufficient exploration during training.</p>
+        <section id="my-projects">
+            <h2>My Projects</h2>
+            <ul>
+                <li><a href="https://github.com/yasamansmi/project1">Project 1: Cybersecurity Anomaly Detection</a></li>
+                <li><a href="https://github.com/yasamansmi/project2">Project 2: NLP for Fraud Detection</a></li>
+                <li><a href="https://github.com/yasamansmi/project3">Project 3: Reinforcement Learning Experiment</a></li>
+            </ul>
+        </section>
 
-    <h2>Clipping: Key Insights</h2>
-    <p>The clipping mechanism in PPO stabilizes training by limiting the magnitude of policy updates. For both positive and negative advantages, the objective function flattens out to prevent over-optimization, ensuring smoother learning and convergence.</p>
+        <section id="my-thoughts-and-hobbies">
+            <h2>My Thoughts and Hobbies</h2>
+            <p>I enjoy exploring the intersection of technology and creativity. My hobbies include singing, dancing and reading philosophy.</p>
+        </section>
 
-    <h3>Illustration of Clipping</h3>
-    <p>The figure below visualizes the clipping mechanism for positive (\(A > 0\)) and negative (\(A < 0\)) advantages:</p>
-    <img src="image.png" alt="PPO Clipped Objective Illustration">
-
-    <h2>PPO vs TRPO</h2>
-    <p>While both PPO and TRPO aim to maintain stability during training, PPO achieves this without the need for complex constraints or second-order optimization. The clipped objective in PPO is computationally efficient and simpler to implement, making it a preferred choice in practice.</p>
-
-    <h2>Further Reading and References</h2>
-    <p>Here are some valuable resources to dive deeper into PPO:</p>
-    <ul>
-        <li><a href="https://arxiv.org/abs/1707.06347">PPO Paper: "Proximal Policy Optimization Algorithms"</a></li>
-        <li><a href="https://www.youtube.com/watch?v=5P7I-xPq8u8">Video Explanation by OpenAI</a></li>
-        <li>Schulman, J., et al. "Trust Region Policy Optimization." <a href="https://arxiv.org/abs/1502.05477">TRPO Paper</a></li>
-        <li><a href="https://www.youtube.com/channel/UC3vXwS3GgWhyTNBL4uVgQDQ">Arxiv Insights YouTube Channel</a></li>
-    </ul>
-
-    <h2>To Be Continued...</h2>
-    <p>This article is a work in progress and will be updated with more details on PPO, including practical implementation tips and examples.</p>
+        <section id="what-i-learned-today">
+            <h2>What I Learned Today</h2>
+            <ul>
+                <li><a href="blog/transfer-learning.html">Transfer Learning</a></li>
+                <li><a href="blog/vanishing-gradient.html">Vanishing/Exploading Gradients</a></li>
+                <li><a href="blog/attention-models.html">Attention Models</a></li>
+                <li><a href="blog/transformers.html">Transformers</a></li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
