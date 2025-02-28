@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Variational Autoencoders (VAEs) and Anomaly Detection</title>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background: #eaeaea;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Understanding Variational Autoencoders (VAEs) and Anomaly Detection</h1>
+        
+        <h2>Anomaly Scores and Data Distribution</h2>
+        <p>Anomaly detection is the process of identifying rare and unusual data points that do not conform to the expected pattern in a dataset. This is particularly important in areas such as fraud detection, cybersecurity, and predictive maintenance. To measure how much a given data point deviates from normal behavior, we use **anomaly scores**. Higher scores indicate more abnormal behavior.</p>
+        
+        <h2>Variational Autoencoder (VAE): Components</h2>
+        <p>A Variational Autoencoder (VAE) is a type of neural network architecture designed for **unsupervised learning and generative modeling**. It consists of three key components:</p>
+        <ol>
+            <li><strong>Encoder:</strong> This module maps high-dimensional input data into a lower-dimensional latent space representation. It captures the essential features needed to describe the input.</li>
+            <li><strong>Sampling Layer:</strong> Instead of mapping inputs to a single point in latent space, this layer introduces randomness by sampling from a probability distribution.</li>
+            <li><strong>Decoder:</strong> Given a sampled latent vector, the decoder reconstructs the original data as closely as possible.</li>
+        </ol>
+        
+        <h2>How the Encoder Works</h2>
+        <p>The encoder transforms input data into a **probabilistic latent representation**. Instead of assigning each input a single value, it assigns a **distribution** (usually Gaussian). This helps ensure smooth interpolation between different data points and prevents overfitting.</p>
+        <ul>
+            <li>Mean vector \( \mu(x) \) represents the center of the Gaussian distribution.</li>
+            <li>Log variance vector \( \log \sigma^2(x) \) defines the spread of the distribution.</li>
+        </ul>
+        <p>Mathematically, this is represented as:</p>
+        <p>\[ q_\phi(z|x) = \mathcal{N}(z; \mu(x), \text{diag}(\sigma^2(x))) \]</p>
+        
+        <h2>What Are Latent Variables?</h2>
+        <p>Latent variables are **hidden variables** that are not directly observed but inferred from the data. In VAEs, they serve as the underlying factors that define the structure of the data. They are useful for:</p>
+        <ul>
+            <li><strong>Dimensionality reduction:</strong> Converting high-dimensional data into a compact representation.</li>
+            <li><strong>Feature extraction:</strong> Identifying the most informative characteristics of the data.</li>
+            <li><strong>Data generation:</strong> Producing new samples by modifying the latent space.</li>
+        </ul>
+        
+        <h2>Bayes’ Theorem in VAEs</h2>
+        <p>Bayes’ Theorem describes how we update our beliefs based on new data:</p>
+        <p>\[ p(z|x) = \frac{p(x|z) p(z)}{p(x)} \]</p>
+        <ul>
+            <li><strong>\( p(x|z) \):</strong> Likelihood—describes how well \( z \) explains the observed data \( x \).</li>
+            <li><strong>\( p(z) \):</strong> Prior—the assumed distribution over latent variables.</li>
+            <li><strong>\( p(x) \):</strong> Evidence—a normalization factor ensuring the probabilities sum to 1.</li>
+        </ul>
+        <p>Since computing \( p(x) \) directly is intractable, VAEs approximate \( p(z|x) \) using \( q_\phi(z|x) \), a simpler function.</p>
+        
+        <h2>KL Divergence in VAEs</h2>
+        <p>KL Divergence is a measure of how different two probability distributions are. In VAEs, we use it to compare the learned **approximate posterior** \( q_\phi(z|x) \) with the **prior** \( p(z) \):</p>
+        <p>\[ D_{KL}(q_\phi(z|x) || p(z)) \]</p>
+        <p>By minimizing this divergence, VAEs ensure that the latent space is well-structured and meaningful.</p>
+        
+        <h2>Loss Functions in VAEs</h2>
+        <p>Training a VAE requires optimizing two loss components:</p>
+        <ol>
+            <li><strong>Reconstruction Loss:</strong> Ensures that the decoder accurately reconstructs the input data from the latent space.</li>
+            <li><strong>KL Divergence:</strong> Encourages the learned latent space distribution \( q_\phi(z|x) \) to be close to the prior \( p(z) \).</li>
+        </ol>
+        
+        <h2>Why VAEs Use an Approximate Posterior</h2>
+        <p>Since the true posterior \( p(z|x) \) is difficult to compute directly, VAEs use a simpler, tractable function \( q_\phi(z|x) \). This makes training efficient while maintaining the ability to generate meaningful new samples.</p>
+        
+        <h2>Final Thoughts</h2>
+        <p>VAEs are a powerful tool for **unsupervised learning, anomaly detection, and generative modeling**. By learning structured latent representations, they enable smooth interpolation between data points and allow for new data generation.</p>
+    </div>
+</body>
+</html>
