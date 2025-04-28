@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GloVe: Understanding Word Co-occurrence and Word Embeddings</title>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GloVe: Understanding Word Co-occurrence and Word Embeddings</h1>
+    
+    <h2>Introduction</h2>
+    <p>Unlike predictive-based models like Word2Vec, GloVe (Global Vectors for Word Representation) is based on word co-occurrence statistics. The key idea is that words with similar meanings tend to appear in similar contexts, and we can capture these relationships using a co-occurrence matrix.</p>
+    
+    <h2>Building the Co-occurrence Matrix</h2>
+    <p>The foundation of GloVe is a co-occurrence matrix \( X \), where each element \( X_{ij} \) represents how often word \( i \) appears with word \( j \) within a given window size.</p>
+    
+    <p>Example of a simplified co-occurrence matrix:</p>
+    <pre>
+        |       | King | Queen | Man |
+        |-------|------|-------|-----|
+        | King  | 12   | 8     | 7   |
+        | Queen | 8    | 10    | 5   |
+        | Man   | 7    | 5     | 14  |
+    </pre>
+    
+    <h2>Optimizing the GloVe Model</h2>
+    <p>GloVe aims to find word vector representations \( w_i \) and \( w_j \) that satisfy the equation:</p>
+    <p>
+        \[
+        w_i^T w_j + b_i + b_j \approx \log X_{ij}
+        \]
+    </p>
+    <p>where:</p>
+    <ul>
+        <li>\( w_i, w_j \) are the word embeddings for words \( i \) and \( j \).</li>
+        <li>\( b_i, b_j \) are bias terms.</li>
+        <li>\( X_{ij} \) is the co-occurrence count.</li>
+    </ul>
+    
+    <h2>Objective Function</h2>
+    <p>The optimization is performed using a weighted least squares objective function:</p>
+    <p>
+        \[
+        J = \sum_{i,j} f(X_{ij}) (w_i^T w_j + b_i + b_j - \log X_{ij})^2
+        \]
+    </p>
+    <p>where \( f(X_{ij}) \) is a weighting function designed to prevent rare or frequent words from dominating the training process.</p>
+    
+    <h2>Word Embeddings and Meaning</h2>
+    <p>Each word \( w_i \) is mapped to a fixed-size vector \( v_i \). Words with similar co-occurrence distributions get similar embeddings, enabling them to capture semantic meaning.</p>
+    
+    <h2>The Role of Logarithm</h2>
+    <p>Applying the logarithm function to the co-occurrence count \( X_{ij} \) serves to smooth the values and avoid extreme differences between rare and common words. Logarithmic scaling helps maintain relative differences while reducing scale disparities.</p>
+    
+    <h2>Comparison: Logarithm vs. Softmax</h2>
+    <ul>
+        <li><strong>Logarithm:</strong> Reduces extreme values while preserving relative differences.</li>
+        <li><strong>Softmax:</strong> Forces one value to dominate by converting values into probabilities.</li>
+    </ul>
+    
+    <h2>Bias Terms</h2>
+    <p>Bias terms \( b_i \) and \( b_j \) capture systematic differences in word frequency. Words that co-occur frequently (high \( X_{ij} \)) should have similar embeddings, whereas words that rarely co-occur should have distant embeddings.</p>
+    
+    <h2>Weighting Function</h2>
+    <p>The weighting function \( f(X_{ij}) \) ensures that very frequent words do not overpower the optimization process. It is defined as:</p>
+    <p>
+        \[
+        f(X_{ij}) = \left\{
+        \begin{array}{ll}
+        \left( \frac{X_{ij}}{X_{max}} \right)^{\alpha}, & \text{if } X_{ij} < X_{max} \\
+        1, & \text{otherwise}
+        \end{array}
+        \right.
+        \]
+    </p>
+    <p>where \( X_{max} \) is a threshold, and \( \alpha \) (typically 0.75) controls how much weight is assigned to frequent words.</p>
+    
+    <h2>Conclusion</h2>
+    <p>GloVe is a powerful model for generating word embeddings by leveraging word co-occurrence statistics. By optimizing a weighted least squares function and mapping words to vector space representations, GloVe effectively captures semantic relationships, improving NLP applications.</p>
+</body>
+</html>
