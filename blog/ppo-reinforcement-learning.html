@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PPO clipping, one numerical example at a time — Yasaman Samiee</title><meta name="description" content="What the clipped objective rewards, where it stops rewarding, and what it does not guarantee.">
+<title>Understanding PPO clipping — Yasaman Samiee</title><meta name="description" content="What the clipped objective rewards, where it stops rewarding, and what it does not guarantee.">
 <link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
 <body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
 <header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Featured explanation</p><h1>PPO clipping, one numerical example at a time</h1><p class="article-deck">What the clipped objective rewards, where it stops rewarding, and what it does not guarantee.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Featured explanation</p><h1>Understanding PPO clipping</h1><p class="article-deck">What the clipped objective rewards, where it stops rewarding, and what it does not guarantee.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
 
 <p>PPO’s clipped objective is easiest to understand by asking one question: how much credit should an update receive for changing the probability of an action that has already been sampled?</p>
 <h2>Three quantities to keep separate</h2>

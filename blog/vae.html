@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAEs and anomaly detection: a score needs validation — Yasaman Samiee</title><meta name="description" content="Reconstruction, regularization, and why an unusual score is not automatically an anomaly.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>VAEs and anomaly detection: a score needs validation</h1><p class="article-deck">Reconstruction, regularization, and why an unusual score is not automatically an anomaly.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
-
-<p>A variational autoencoder learns a probabilistic latent representation and a decoder. The encoder approximates a posterior distribution over latent variables rather than assigning each input only one fixed code.</p>
-<h2>Two terms with different jobs</h2>
-<p>The training objective combines expected reconstruction log-likelihood with a KL-divergence penalty between the approximate posterior and a prior. Reconstruction encourages the latent code to retain useful information; the KL term regularizes how codes are distributed.</p>
-<p>For a Gaussian encoder, the reparameterization <code>z = μ(x) + σ(x) × ε</code>, with ε sampled from a standard normal distribution, allows gradients through the encoder parameters. The decoder likelihood must suit the data; mean squared error is not a universal reconstruction objective.</p>
-<h2>Using the model to flag records</h2>
-<p>For an illustrative anomaly detector, one could rank records by reconstruction error or a likelihood-related score. Neither ranking automatically identifies operationally important anomalies. A flexible decoder may reconstruct unusual records well, while harmless distribution shifts may receive high scores.</p>
-<p>Choose a threshold using held-out data and the acceptable review workload. Where labels exist, measure precision and recall at that threshold. Check false positives by segment and validate on later data. A useful anomaly score needs a decision context as well as a mathematical definition.</p>
-<p class="source-note">Model foundation: <a href="https://arxiv.org/abs/1312.6114">Kingma and Welling, Auto-Encoding Variational Bayes</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

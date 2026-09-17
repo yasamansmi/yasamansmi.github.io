@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeepSeek-R1: what group-relative rewards change — Yasaman Samiee</title><meta name="description" content="Distinguishing R1-Zero, R1, and distilled models in the original research.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>DeepSeek-R1: what group-relative rewards change</h1><p class="article-deck">Distinguishing R1-Zero, R1, and distilled models in the original research.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
-
-<p>This note concerns the original DeepSeek-R1 research release, not a comparison of current model rankings. The useful question is how a learning signal can be formed without a separate learned value model.</p>
-<h2>Keep the model names separate</h2>
-<p>R1-Zero applied reinforcement learning without a preliminary supervised fine-tuning stage. R1 introduced cold-start data and a multistage training pipeline to address usability and reasoning. Distilled models were trained from generated reasoning data using Qwen and Llama base families. These are distinct training setups, as described in the <a href="https://github.com/deepseek-ai/DeepSeek-R1">official repository</a>.</p>
-<h2>Compare responses to the same prompt</h2>
-<p>Group Relative Policy Optimization (GRPO) samples a group of outputs for one prompt and forms relative advantages from their rewards. In the original formulation, an output’s reward is centered by the group mean and scaled by the group standard deviation. The group provides the baseline rather than a separately learned critic.</p>
-<p>As a toy example, rewards [0, 0, 1, 1] have mean 0.5 and population standard deviation 0.5, producing normalized values [−1, −1, +1, +1]. This shows the comparison; it is not a complete training implementation. Equal rewards provide no within-group ranking signal, and numerical handling of zero variance matters.</p>
-<h2>The reward still sets the target</h2>
-<p>A relative score cannot make a flawed reward trustworthy. A format checker can reward formatting while missing a wrong answer. KL regularization discourages departure from a reference policy, but does not guarantee prevention of reward hacking.</p>
-<p class="source-note">Method reference: <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 paper</a>. The arithmetic example is illustrative.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

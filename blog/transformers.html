@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transformers: following a token through one block — Yasaman Samiee</title><meta name="description" content="Embeddings, attention, and feed-forward layers without the unrelated detours.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>Transformers: following a token through one block</h1><p class="article-deck">Embeddings, attention, and feed-forward layers without the unrelated detours.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
-
-<p>A transformer builds contextual representations using attention and feed-forward layers. Its defining distinction from a recurrent architecture is not that it learns from examples—both do—but how it exchanges information between positions.</p>
-<h2>From token IDs to contextual vectors</h2>
-<p>Token IDs index an embedding table. Position information lets the model distinguish sequences with different order. Within an attention head, learned projections form queries, keys, and values. Query-key scores, scaled and normalized with softmax, weight the values.</p>
-<p>Multiple heads allow different learned projections. A feed-forward network then transforms each position’s representation. Residual connections and normalization support the stack; their ordering varies across architectures.</p>
-<h2>The mask changes the task</h2>
-<p>In a causal decoder, a position cannot attend to future tokens. During training, many positions can be processed together under that mask. Autoregressive generation still produces tokens sequentially. An encoder can use bidirectional attention; an encoder-decoder model can additionally attend to encoder outputs.</p>
-<h2>What reaches the output</h2>
-<p>For language generation, the final representation is projected to vocabulary logits. Softmax converts those logits to probabilities. Embedding dimensions are model-specific, and individual coordinates generally do not have a simple named interpretation.</p>
-<p>A larger context window allows more tokens as input. It does not guarantee the model will correctly use every fact inside that window.</p>
-<p class="source-note">Architecture reference: <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>. This note describes the main components, not every later transformer variant.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

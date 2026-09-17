@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vanishing gradients: think in products of derivatives — Yasaman Samiee</title><meta name="description" content="Why depth, activation functions, and initialization affect the training signal.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>Vanishing gradients: think in products of derivatives</h1><p class="article-deck">Why depth, activation functions, and initialization affect the training signal.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 1 min read</p></header>
-
-<p>Backpropagation multiplies local derivatives as it carries a loss signal through a network. Repeated contractions can make early-layer gradients tiny; repeated amplification can make them unstable. The behavior depends on the layer Jacobians, including activation derivatives, not simply on whether individual weights exceed one.</p>
-<h2>A scalar example</h2>
-<p>In a deliberately simplified linear chain with 20 identical multipliers, a local derivative of 0.5 contributes a product of 0.5²⁰, about 0.000000954. A derivative of 1.5 produces about 3,325. Real networks involve matrices and nonlinearities, so this example illustrates a mechanism rather than predicting their exact behavior.</p>
-<h2>Diagnose before changing the model</h2>
-<p>Inspect gradient norms by layer, activation distributions, and whether parameters actually change. Saturated activations, poor scaling, unsuitable initialization, or an implementation error can produce similar training symptoms.</p>
-<p>Initialization designed for the activation function can help preserve signal scale. Residual connections provide additional gradient paths. Gradient clipping can limit large updates but does not solve disappearing gradients. ReLU avoids saturation on its positive side, but inactive units still have zero derivative.</p>
-<p class="source-note">Background: <a href="https://proceedings.mlr.press/v9/glorot10a.html">Glorot and Bengio on initialization</a>; <a href="https://arxiv.org/abs/1512.03385">He et al. on residual networks</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

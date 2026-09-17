@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transfer learning: freeze first, then decide what to adapt — Yasaman Samiee</title><meta name="description" content="A practical distinction between using learned features and fine-tuning them.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>Transfer learning: freeze first, then decide what to adapt</h1><p class="article-deck">A practical distinction between using learned features and fine-tuning them.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 1 min read</p></header>
-
-<p>Transfer learning reuses information learned on one task for another. In a neural network, this often means starting with pretrained weights instead of training every parameter from scratch.</p>
-<h2>Two useful starting points</h2>
-<p>With a frozen feature extractor, keep the pretrained backbone fixed and train a new task-specific head. With fine-tuning, update some or all backbone weights as well. Fine-tuning is not limited to a particular layer; the choice depends on the data, task, and compute budget.</p>
-<h2>A concrete decision</h2>
-<p>For a small labeled image dataset, compare a frozen backbone plus classifier against a cautiously fine-tuned version on the same held-out split. If the images differ strongly from the pretraining domain, frozen features may be insufficient. If labels are scarce, updating many parameters may overfit.</p>
-<p>Check input normalization, label definitions, and overlap between training and evaluation data. Pretraining reduces the amount of learning needed; it does not guarantee that the learned features transfer. Keep a simple baseline to measure whether the extra complexity helps.</p>
-<p class="source-note">Example workflow: <a href="https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html">PyTorch transfer learning tutorial</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

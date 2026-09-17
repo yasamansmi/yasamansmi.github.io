@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BFS and DFS: choose by the search you need — Yasaman Samiee</title><meta name="description" content="Shortest paths in unweighted graphs, traversal order, and memory on different tree shapes.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>BFS and DFS: choose by the search you need</h1><p class="article-deck">Shortest paths in unweighted graphs, traversal order, and memory on different tree shapes.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
-
-<p>Breadth-first search explores vertices by distance from a starting point. Depth-first search follows a branch before backtracking. Both need a visited set on general graphs to avoid repeatedly traversing cycles.</p>
-<h2>A minimal graph BFS</h2>
-<pre><code>from collections import deque
-
-def distances(graph, start):
-    distance = {start: 0}
-    queue = deque([start])
-    while queue:
-        node = queue.popleft()
-        for neighbor in graph.get(node, []):
-            if neighbor not in distance:
-                distance[neighbor] = distance[node] + 1
-                queue.append(neighbor)
-    return distance</code></pre>
-<p>Marking a vertex when it enters the queue prevents duplicate enqueues. For <code>A → B, A → C, B → D, C → D</code>, the distances from A are 0, 1, 1, and 2. The same approach works with cycles because previously discovered vertices are skipped.</p>
-<h2>Distance depends on the edge model</h2>
-<p>BFS finds shortest paths by number of edges in an unweighted graph. It does not generally minimize unequal edge costs. DFS is useful for exploration and as a component of algorithms such as cycle detection, but its first discovered path need not be shortest.</p>
-<h2>Time and space</h2>
-<p>With adjacency lists, both traversals take O(V + E) time over the reachable graph. A visited set may use O(V) memory. On a tree without a visited set, BFS frontier memory depends on width, while recursive DFS stack memory depends on height. A chain has constant-width BFS frontier and an O(V) DFS stack; a balanced binary tree reverses much of that memory tradeoff.</p>
-<p class="source-note">Reference implementation and discussion: <a href="https://algs4.cs.princeton.edu/41graph/">Princeton Algorithms: undirected graphs</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attention: retrieving a context for each output — Yasaman Samiee</title><meta name="description" content="A small weighted-sum example and the difference between attention and guaranteed alignment.">
-<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
-<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>Attention: retrieving a context for each output</h1><p class="article-deck">A small weighted-sum example and the difference between attention and guaranteed alignment.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 1 min read</p></header>
-
-<p>An encoder-decoder model can compress an input into a fixed representation. Attention gives the decoder another option: consult a weighted combination of input representations for each output step.</p>
-<h2>Scores become weights</h2>
-<p>A scoring function compares a decoder query with encoder states. Applying softmax across the input positions produces nonnegative weights that sum to one. The context is the weighted sum of the corresponding value vectors.</p>
-<p>For values [1, 0] and [0, 2], weights of 0.25 and 0.75 produce context [0.25, 1.5]. These are illustrative vectors; their coordinates do not correspond to named meanings.</p>
-<h2>What the mechanism does not prove</h2>
-<p>A large weight tells us how this weighted combination was formed. It is not automatically a causal explanation of the final prediction. Other heads, layers, and residual paths can contribute.</p>
-<p>Cross-attention over n input positions for m output positions uses n × m pairwise scores per head in the straightforward implementation. Full self-attention over n positions uses n². Those statements concern the score matrix; other computations and implementation choices also affect total cost.</p>
-<p class="source-note">Original encoder-decoder attention: <a href="https://arxiv.org/abs/1409.0473">Bahdanau et al.</a>. Transformer attention: <a href="https://arxiv.org/abs/1706.03762">Vaswani et al.</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Yasaman Samiee</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/writing.html">
+    <link rel="canonical" href="https://yasamansmi.github.io/writing.html">
+    <link rel="stylesheet" href="/style.css?v=20260917-writing">
+</head>
+<body class="article-page">
+    <main class="article-body">
+        <h1>Writing</h1>
+        <p>This older note has been retired. <a href="/writing.html">Browse my current writing →</a></p>
+    </main>
+</body>
+</html>
