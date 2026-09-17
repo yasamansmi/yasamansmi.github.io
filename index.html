@@ -21,7 +21,7 @@
     <div class="left-column">
         <img src="profile.jpeg" alt="Yasaman Samiee">
         <h1>Yasaman Samiee</h1>
-        <p>Senior Data Scientist building production ML and decision systems for marketplaces and cybersecurity.</p>
+        <p>Senior Data Scientist at WorkWhile.</p>
 
 
         <p>LinkedIn: <a href="https://www.linkedin.com/in/yasamansamiee/">linkedin.com/in/yasamansamiee</a></p>
@@ -29,14 +29,45 @@
 
     <main class="right-column" id="main-content">
 <section class="portfolio-intro"><h2>Hi, I’m Yasaman.</h2><p>I’m a Senior Data Scientist at WorkWhile, working on incentives, forecasting, and experimentation. Previously, I built authentication-risk and anomaly-detection models for cybersecurity products.</p><a href="cv/">View my résumé →</a></section>
-<section id="recent-work"><p class="eyebrow">WorkWhile</p><h2>What I work on</h2><div class="case-list">
-<article class="project-card"><span class="project-type">Reinforcement learning</span><h3>Worker incentives</h3><p>I built and deployed a Bayesian reinforcement-learning system that updates worker incentives every hour across thousands of shifts.</p><details><summary>More about this work</summary><p>The system decides how to allocate incentives as staffing needs change, within a set budget. I built the training and inference pipelines, online updates, and monitoring.</p><p>I also worked on budget safeguards, testing, and controlled rollouts so we could catch problems before they affected more shifts.</p></details></article>
-<article class="project-card"><span class="project-type">Forecasting · Optimization · Experimentation</span><h3>Forecasting backup staffing needs</h3><p>I built understaffing forecasts and an optimizer that recommended about <strong>31% less backup staffing</strong> in an offline comparison.</p><details><summary>More about this work</summary><p>The optimizer weighs staffing needs against replacement risk, service levels, and cost.</p><p>I also led randomized staffing and incentive experiments. In a separate staffing experiment, more shifts were filled, but net revenue fell. I presented those results and recommended against a broader rollout.</p></details></article>
-<article class="project-card"><span class="project-type">LLMs · Account prioritization</span><h3>Helping account teams decide where to focus</h3><p>I built an LLM-assisted workflow that brings customer calls and meeting notes together with marketplace data and forecasts.</p><details><summary>More about this work</summary><p>Information about an account was spread across conversations and operational data. I combined those sources to help teams identify retention risks, expansion opportunities, and where more support was needed.</p><p>I worked with account managers and Operations to validate the outputs and kept their review as part of the workflow.</p></details></article>
-</div></section>
-<section id="my-projects"><p class="eyebrow">Independent work</p><h2>Things I’ve built.</h2>
-<article class="project-card featured-product"><span class="project-type">Live product · Applied AI</span><h3>CouchKarma</h3><p>A mood-and-taste recommendation app for movies, series, books, and podcasts, with Canadian streaming checks.</p><p>I built the picker, taste ratings, and podcast search, and deployed the app on Cloudflare.</p><p>The AI chooses from titles the app supplies. For movies and series, the app checks Canadian availability against your selected subscriptions before recommending a title.</p><p class="stack">TypeScript · React · OpenAI · Cloudflare</p><a href="https://couchkarma.com">Try CouchKarma ↗</a><p class="project-note">Live product · private source repository</p></article>
-<article class="project-card compact-project"><h3>Peeky Data</h3><p>A small Python/Streamlit tool for exploring CSV types, missing values, statistics, and distributions.</p><a href="https://github.com/yasamansmi/peeky-data">View Peeky Data ↗</a></article>
+<section id="recent-work">
+    <p class="eyebrow">WorkWhile</p>
+    <h2>What I work on</h2>
+    <div class="case-list">
+        <article class="project-card">
+            <h3>Worker incentives</h3>
+            <p>Staffing needs change throughout the day, and incentives have to stay within budget. At WorkWhile, I built a system that updates those incentives every hour across thousands of shifts.</p>
+            <p>It uses Bayesian reinforcement learning. My work also covered the training pipelines, online updates, and monitoring needed to run it in production.</p>
+        </article>
+        <article class="project-card">
+            <h3>Planning backup staffing</h3>
+            <p>Backup staffing helps cover gaps, but it comes at a cost. I built understaffing forecasts and an optimizer that weighs staffing needs, replacement risk, and cost. In an offline comparison, it recommended about <strong>31% less backup staffing</strong>.</p>
+            <p>Experiments were another part of this work. In a separate staffing experiment, more shifts were filled, but net revenue fell. I presented the results and recommended against a broader rollout.</p>
+        </article>
+        <article class="project-card">
+            <h3>Bringing customer information together</h3>
+            <p>Customer calls and meeting notes tell a different part of the story from marketplace data. I built an LLM-assisted workflow that brings those sources together to help account teams identify retention risks, expansion opportunities, and accounts that need more support.</p>
+            <p>I worked with account managers and Operations to validate the outputs, with human review built into the workflow.</p>
+        </article>
+    </div>
+</section>
+<section id="my-projects">
+    <h2>Personal projects</h2>
+    <article class="project-card featured-product">
+        <h3>CouchKarma</h3>
+        <p>For when you want something to watch, read, or listen to, but don’t have a title in mind. CouchKarma suggests a pick based on your mood, taste, and available time.</p>
+        <p>I built the app, including taste ratings and podcast search. For movies and series, it checks Canadian streaming availability against your selected subscriptions. The AI chooses from titles supplied by the app.</p>
+        <p class="stack">TypeScript · React · OpenAI · Cloudflare</p>
+        <a href="https://couchkarma.com">Try CouchKarma ↗</a>
+        <p class="project-note">Live app · private source repository</p>
+    </article>
+    <article class="project-card compact-project">
+        <h3>Peeky Data</h3>
+        <p>A quick first look at an unfamiliar CSV. Peeky Data shows missing values, duplicate rows, column types, and distributions in a small Streamlit app.</p>
+        <p>I paid particular attention to how it reads the data: IDs with leading zeros stay as text, and numeric summaries exclude values that can’t be interpreted as finite numbers.</p>
+        <a href="https://peeky-data.streamlit.app/">Try Peeky Data ↗</a>
+        <span aria-hidden="true"> · </span>
+        <a href="https://github.com/yasamansmi/peeky-data">View source ↗</a>
+    </article>
 </section>
 <footer class="portfolio-footer"><a href="cv/">Résumé</a><a href="writing.html">Writing</a><a href="earlier-projects.html">Earlier projects</a><a href="https://www.linkedin.com/in/yasamansamiee/">Get in touch</a></footer>
 </main></body></html>
