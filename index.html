@@ -12,63 +12,45 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasaman Samiee</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: row;
-            margin: 0;
-        }
-        .left-column {
-            width: 25%;
-            background-color: #f4f4f4;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .right-column {
-            width: 75%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        img {
-            display: block;
-            margin: 0 auto 20px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-        a {
-            color: #0073b1;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style> 
+    <title>Yasaman Samiee — Data science & applied AI</title>
+    <meta name="description" content="Selected data science and applied AI projects by Yasaman Samiee, including CouchKarma and Peeky Data.">
+    <link rel="stylesheet" href="style.css?v=20260916">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="left-column">
         <img src="profile.jpeg" alt="Yasaman Samiee">
-        <h2>Yasaman Samiee</h2>
-        <p>Data Scientist passionate about machine learning, cybersecurity, and sharing knowledge.</p>
-        <p>Email: <a href="mailto:yasaman.msamiee@gmail.com">yasaman.msamiee@gmail.com</a></p>
-        <p>Phone: +1 (604) 729-1574</p>
+        <h1>Yasaman Samiee</h1>
+        <p>Senior Data Scientist building production ML and decision systems for marketplaces and cybersecurity.</p>
+
+
         <p>LinkedIn: <a href="https://www.linkedin.com/in/yasamansamiee/">linkedin.com/in/yasamansamiee</a></p>
     </div>
 
-    <div class="right-column">
+    <main class="right-column" id="main-content">
 
 
+
+<section id="recent-work"><p class="eyebrow">Professional work</p><h2>Decisions that work in production.</h2><p>At WorkWhile, I work on the systems behind staffing decisions in a workforce marketplace.</p><div class="project-grid"><article class="project-card"><h3>Dynamic worker incentives</h3><p>Bayesian reinforcement learning for hourly incentive decisions, with online updates, budget safeguards, and production monitoring.</p></article><article class="project-card"><h3>Forecasting and staffing decisions</h3><p>Understaffing forecasts and a profit-aware optimizer that reduced recommended backup staffing by about 31%, accounting for service levels, replacement risk, and cost.</p></article><article class="project-card"><h3>Experimentation and product judgment</h3><p>Randomized staffing and incentive experiments that evaluate operational improvements alongside their economics.</p></article><article class="project-card"><h3>LLM-assisted account prioritization</h3><p>A human-reviewed workflow combining customer conversations and operational data into explainable account priorities.</p></article></div></section>
+        <section id="my-projects">
+            <p class="eyebrow">Independent projects</p>
+            <h2>Selected independent projects.</h2>
+            <div class="project-grid">
+                <article class="project-card"><span class="project-type">Applied AI · Web product</span><h3>CouchKarma</h3><p>A live app that recommends movies, series, books, and podcasts based on mood, time, and taste. Video recommendations check Canadian streaming subscriptions.</p><p class="stack">TypeScript · React · OpenAI · Cloudflare</p><a href="https://couchkarma.com">Explore CouchKarma ↗</a><p class="project-note">Live product; source repository is private.</p></article>
+                <article class="project-card"><span class="project-type">Data exploration · Python</span><h3>Peeky Data</h3><p>A Streamlit dashboard for exploring CSV datasets: missing values, column types, descriptive statistics, and value distributions.</p><p class="stack">Python · pandas · Streamlit</p><a href="https://github.com/yasamansmi/peeky-data">View project on GitHub ↗</a></article>
+                <article class="project-card"><span class="project-type">Machine learning · Forecasting</span><h3>Bike-sharing demand</h3><p>A Python project for forecasting hourly bike rentals, with preprocessing, a random-forest model, documentation, and sample tests.</p><p class="stack">Python · scikit-learn · Poetry</p><a href="https://github.com/yasamansmi/bike-sharing-software">View project on GitHub ↗</a></article>
+            </div>
+        </section>
 
         <section id="cv">
-            
+
             <h2>Professional Summary</h2>
-            <p>Data Scientist with extensive expertise in cybersecurity, anomaly detection, and machine learning using advanced techniques. Skilled in developing and deploying scalable models to production, with a proven track record of improving security protocols and delivering data-driven insights. Passionate about leveraging state-of-the-art tools, including NLP and reinforcement learning, to solve complex challenges and drive innovation.</p>
+            <p>Senior Data Scientist at WorkWhile, building production machine-learning and decision systems for a workforce marketplace. My work spans Bayesian reinforcement learning, forecasting, experimentation, and human-reviewed LLM workflows, with earlier experience in real-time authentication risk and anomaly detection.</p>
             <p><a href="cv/">View My Full CV Here</a></p>
             <h3>Work Experience</h3>
             <ul>
-                <li><strong>Data Scientist, SecureAuth (Jan 2022 – Present)</strong></li>
+                <li><strong>Senior Data Scientist, WorkWhile (July 2025 – Present)</strong></li>
+                <li><strong>Data Scientist — Cybersecurity, SecureAuth (Jan 2022 – July 2025)</strong></li>
                 <li><strong>Data Science Engineer, Acceptto Corporation (May 2020 – Dec 2021)</strong></li>
                 <li><strong>Data Scientist, Digikala.com (May 2020 – Dec 2020)</strong></li>
                 <li><strong>Business Intelligence Analyst, Takhfifan (Nov 2017 – Feb 2018)</strong></li>
@@ -76,29 +58,22 @@
             </ul>
 
             <h3>Skills</h3>
-            <p><strong>Technologies:</strong> Python (TensorFlow, Scikit-learn), Spark, SQL, Docker, AWS, Git.</p>
+            <p><strong>Technologies:</strong> Python, SQL, Dagster, BigQuery, GCS, Spark, scikit-learn, TensorFlow, Docker, AWS, Git.</p>
             <p><strong>Analytics:</strong> Statistical Modeling, Machine Learning, Threat Detection, Risk Analysis, Data Visualization.</p>
         </section>
 
-        <section id="my-projects">
-            <h2>My Projects</h2>
-            <ul>
-                <li><a href="https://github.com/yasamansmi/JDA-software">Bike Sharing Prediction Project</a></li>
-                <li><a href="https://github.com/yasamansmi/peeky-data">Peeky Data</a></li>
 
-            </ul>
-        </section>
-<!-- 
+<!--
         <section id="my-thoughts-and-hobbies">
             <h2>My Thoughts and Hobbies</h2>
             <p>I enjoy exploring the intersection of technology and creativity. My hobbies include singing, dancing and reading philosophy.</p>
         </section> -->
 
         <section id="what-i-learned-today">
-            <h2>What I Learned Today</h2>
+            <h2>Technical notes</h2>
             <ul>
                 <li><a href="blog/transfer-learning.html">Transfer Learning</a></li>
-                <li><a href="blog/vanishing-gradient.html">Vanishing/Exploading Gradients</a></li>
+                <li><a href="blog/vanishing-gradient.html">Vanishing/Exploding Gradients</a></li>
                 <li><a href="blog/attention-models.html">Attention Models</a></li>
                 <li><a href="blog/transformers.html">Transformers</a></li>
                 <li><a href="blog/BFS-DFS.html">BFS & DFS Algorithms</a></li>
@@ -109,6 +84,6 @@
                 <li><a href="blog/rag.html">Retrieval-Augmented Generation (RAG)</a></li>
             </ul>
         </section>
-    </div>
+    </main>
 </body>
 </html>
