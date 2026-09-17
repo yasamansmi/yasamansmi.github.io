@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CouchKarma: separating a good suggestion from a verified fact — Yasaman Samiee</title><meta name="description" content="Why the recommendation pipeline checks candidates before asking AI to choose.">
+<title>How CouchKarma picks a movie — Yasaman Samiee</title><meta name="description" content="The streaming checks behind a recommendation, and what happens when they fail.">
 <link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
 <body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
 <header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
-<main id="main-content" class="article-body"><article><header><p class="eyebrow">Project notes</p><h1>CouchKarma: separating a good suggestion from a verified fact</h1><p class="article-deck">Why the recommendation pipeline checks candidates before asking AI to choose.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Project notes</p><h1>How CouchKarma picks a movie</h1><p class="article-deck">The streaming checks behind a recommendation, and what happens when they fail.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
 
-<p>CouchKarma recommends something to watch, read, or listen to based on mood, available time, and taste. For movies and series, selected subscriptions introduce a harder requirement: an appealing recommendation is not useful if it is unavailable on those services.</p>
-<h2>Give the model a bounded decision</h2>
-<p>The live recommendation pipeline assembles candidate records before asking the model to choose. The selection response contains a candidate ID; the server checks that ID against the supplied set. Titles, links, runtime, and streaming metadata come from the candidate record rather than from generated prose.</p>
-<p>This makes the model responsible for choosing a fit and explaining it, while the application owns the factual fields. It reduces one avenue for invented titles or links. It does not prove that the explanation is correct or that the user will like the recommendation.</p>
-<h2>Availability is a separate check</h2>
-<p>Video availability is checked for Canada and the selected subscription providers. Rental and purchase options do not satisfy a subscription filter. If availability cannot be verified, the application should not quietly describe a title as included.</p>
-<p>There are two different failure cases. A particular title’s lookup can fail while other candidates still have usable metadata. A service-wide failure can leave nothing verified. The implementation skips transient failures for individual titles but returns an availability error when the checks fail without leaving usable candidates. Authentication failures remain errors rather than being treated as missing titles.</p>
-<h2>“No match” is a meaningful result</h2>
-<p>A successful lookup can still find no titles that fit the current batch, subscriptions, and time limit. That result should ask the user to change a constraint rather than invent a match. It also should not claim that no suitable title exists anywhere: the search is bounded.</p>
-<p>The same principle shapes podcast recommendations. Directory candidates provide actual episode metadata before selection. A directory lookup is not a promise of complete episode history.</p>
-<h2>What this project demonstrates—and what remains open</h2>
-<p>The engineering work centers on candidate validation, explicit service failures, and keeping factual metadata separate from generated explanations. Automated checks and individual live requests exercise these paths; they do not establish recommendation quality across users.</p>
-<p>A next evaluation would label a set of requests with hard constraints and measure constraint violations separately from subjective satisfaction. That would distinguish “the app returned a valid candidate” from “the recommendation was worth someone’s evening.”</p>
-<p class="source-note">Implementation note, September 2026. Based on the project’s candidate-selection and availability code. <a href="https://couchkarma.com">Try CouchKarma</a>. No user study or business-impact result is claimed here.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
+<p>Say you want a short comedy and you have Netflix. A recommendation that turns out to cost $5 to rent elsewhere hasn’t really answered the request.</p>
+<p>That’s one of the details I had to account for in <a href="https://couchkarma.com">CouchKarma</a>, an app I’m building to help people find something to watch, read, or listen to. You give it your mood, available time, and preferences. For movies and series, you can also choose your streaming subscriptions.</p>
+<h2>Start with movies the app can check</h2>
+<p>Before asking the AI to pick a movie, the app gathers a list of candidates and checks their streaming availability in Canada. If you’ve selected subscriptions, the candidates need to be included in those services. A rental listing doesn’t count.</p>
+<p>The AI gets that list and chooses an ID. The server then looks up the matching record for the title, runtime, and links. Those fields come from the record; the model writes the short explanation of why it chose the movie.</p>
+<p>I kept that separation because streaming availability is something the app can look up. There’s no reason to ask the model to guess it.</p>
+<h2>When a lookup fails</h2>
+<p>A failed lookup for one movie shouldn’t stop the whole search. The app skips that movie and continues with candidates it could check.</p>
+<p>But if the availability checks fail and leave no usable candidates, it returns an error and asks you to try again. It doesn’t quietly remove your subscription choices to produce an answer.</p>
+<p>There’s also a less dramatic possibility: the checks worked, but nothing in the batch fits. That’s a reason to try different preferences, not proof that there’s no suitable movie anywhere.</p>
+<h2>Would you actually enjoy the pick?</h2>
+<p>That’s the part I haven’t measured across users yet. The code checks whether a choice comes from the supplied list and whether it meets the streaming requirements. It can still return a movie you don’t want to watch, with an explanation that misses what you meant.</p>
+<p>For a broader evaluation, I’d track those separately: did the app respect the request, and did the person like the recommendation? The first is easier to test. The second needs feedback from people using it.</p>
+<p class="source-note">Notes from the CouchKarma implementation, September 2026. <a href="https://couchkarma.com">Try the app</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
