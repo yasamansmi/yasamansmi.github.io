@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CouchKarma: separating a good suggestion from a verified fact — Yasaman Samiee</title><meta name="description" content="Why the recommendation pipeline checks candidates before asking AI to choose.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Project notes</p><h1>CouchKarma: separating a good suggestion from a verified fact</h1><p class="article-deck">Why the recommendation pipeline checks candidates before asking AI to choose.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
+
+<p>CouchKarma recommends something to watch, read, or listen to based on mood, available time, and taste. For movies and series, selected subscriptions introduce a harder requirement: an appealing recommendation is not useful if it is unavailable on those services.</p>
+<h2>Give the model a bounded decision</h2>
+<p>The live recommendation pipeline assembles candidate records before asking the model to choose. The selection response contains a candidate ID; the server checks that ID against the supplied set. Titles, links, runtime, and streaming metadata come from the candidate record rather than from generated prose.</p>
+<p>This makes the model responsible for choosing a fit and explaining it, while the application owns the factual fields. It reduces one avenue for invented titles or links. It does not prove that the explanation is correct or that the user will like the recommendation.</p>
+<h2>Availability is a separate check</h2>
+<p>Video availability is checked for Canada and the selected subscription providers. Rental and purchase options do not satisfy a subscription filter. If availability cannot be verified, the application should not quietly describe a title as included.</p>
+<p>There are two different failure cases. A particular title’s lookup can fail while other candidates still have usable metadata. A service-wide failure can leave nothing verified. The implementation skips transient failures for individual titles but returns an availability error when the checks fail without leaving usable candidates. Authentication failures remain errors rather than being treated as missing titles.</p>
+<h2>“No match” is a meaningful result</h2>
+<p>A successful lookup can still find no titles that fit the current batch, subscriptions, and time limit. That result should ask the user to change a constraint rather than invent a match. It also should not claim that no suitable title exists anywhere: the search is bounded.</p>
+<p>The same principle shapes podcast recommendations. Directory candidates provide actual episode metadata before selection. A directory lookup is not a promise of complete episode history.</p>
+<h2>What this project demonstrates—and what remains open</h2>
+<p>The engineering work centers on candidate validation, explicit service failures, and keeping factual metadata separate from generated explanations. Automated checks and individual live requests exercise these paths; they do not establish recommendation quality across users.</p>
+<p>A next evaluation would label a set of requests with hard constraints and measure constraint violations separately from subjective satisfaction. That would distinguish “the app returned a valid candidate” from “the recommendation was worth someone’s evening.”</p>
+<p class="source-note">Implementation note, September 2026. Based on the project’s candidate-selection and availability code. <a href="https://couchkarma.com">Try CouchKarma</a>. No user study or business-impact result is claimed here.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>

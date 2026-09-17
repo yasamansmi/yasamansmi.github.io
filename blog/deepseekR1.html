@@ -1,100 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSeek R1</title>
-    <script id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-    </style>
-</head>
-<body>
-    <h1>DeepSeek R1</h1>
-    
-    <h2>Introduction</h2>
-    <p>DeepSeek R1 is a large language model developed by DeepSeek AI. It is designed for advanced reasoning tasks, including mathematical problem-solving and coding. Unlike traditional models, DeepSeek R1 combines supervised fine-tuning (SFT) with reinforcement learning (RL) using the Grouped Relative Policy Optimization (GRPO) algorithm. This hybrid approach enables structured reasoning and improved decision-making.</p>
-    
-    <h2>DeepSeek R1M</h2>
-    <p>DeepSeek R1M builds upon DeepSeek R1 but introduces:</p>
-    <ul>
-        <li>A gold-standard dataset</li>
-        <li>A multi-stage reinforcement learning process</li>
-    </ul>
-    <p>It also incorporates smaller models like Qwen and Llama.</p>
-    
-    <h2>Training Process</h2>
-    <ol>
-        <li>Uses <strong>Grouped Relative Policy Optimization (GRPO)</strong> to train models without needing a critic model.</li>
-        <li>Relies on rewards for structured format and accuracy, using matrix \( A \) as a consistency measure.</li>
-    </ol>
-    
-    <h2>Core Concept Behind DeepSeek R1</h2>
-    <p>Instead of using supervised fine-tuning alone, the model learns through reinforcement learning. It adapts its policy through:</p>
-    <ul>
-        <li><strong>Chain of Thought (CoT)</strong>: Encouraging the model to think step-by-step.</li>
-        <li><strong>Reinforcement Learning</strong>: Rewarding good decisions.</li>
-        <li><strong>Model Distillation</strong>: Training smaller models to perform similarly to larger ones.</li>
-    </ul>
-    
-    <h2>Algorithm: GRPO</h2>
-    <p>Grouped Relative Policy Optimization (GRPO) is a reinforcement learning method designed to stabilize policy updates. The formula for GRPO is:</p>
-    <p><img src="pictures/deepseek/GRPO.png" alt="GRPO Formula" style="max-width: 80%; height: auto;"></p>
-    
-    <h2>Understanding the A Matrix</h2>
-    <p>The A matrix, also known as the advantage function, measures how beneficial an action is compared to the expected value. It is defined as:</p>
-    <p>
-        \[ A_t = Q(s_t, a_t) - V(s_t) \]
-    </p>
-    <ul>
-        <li><strong>Q(s_t, a_t)</strong>: Expected return (reward) when taking action \( a_t \) at state \( s_t \).</li>
-        <li><strong>V(s_t)</strong>: Baseline value function estimating the expected return of being in state \( s_t \) without considering a specific action.</li>
-    </ul>
-    <p>This helps adjust decisions dynamically, optimizing rewards while maintaining stability.</p>
-    
-    <h2>Distillation Process</h2>
-    <p>To improve efficiency, DeepSeek R1 uses knowledge distillation, where smaller models learn from larger models, enabling performance retention while reducing computational costs.</p>
-    
-    <h2>Trajectory-Based Learning</h2>
-    <p>A trajectory is a sequence of actions a model has taken. Reinforcement learning updates policies based on successful trajectories, favoring actions that lead to better rewards.</p>
-    
-    <h2>Advantage Term in DeepSeek R1</h2>
-    <p>Each log probability in the model is weighted by an advantage term, ensuring better decision-making.</p>
-    
-    <h3>Kullback-Leibler (KL) Divergence</h3>
-    <p>KL divergence is used to measure the difference between probability distributions:</p>
-    <p>
-        \[ D_{KL}(\pi_{\theta} || \pi_{\text{ref}}) = \frac{\pi_{\text{ref}}(o_i | q)}{\pi_{\theta}(o_i | q)} - \log \frac{\pi_{\text{ref}}(o_i | q)}{\pi_{\theta}(o_i | q)} - 1 \]
-    </p>
-    <p>This prevents reward hacking and excessive deviation from the reference model.</p>
-    
-    <h2>Conclusion</h2>
-    <p>DeepSeek R1 represents a significant advancement in AI, integrating supervised fine-tuning and reinforcement learning to enhance reasoning capabilities. Its structured training approach enables high-quality responses, making it a powerful model for complex problem-solving.</p>
-    
-    <h2>References</h2>
-    <ul>
-        <li><a href="https://www.youtube.com/watch?v=kv8frWeKoeo" target="_blank">DeepSeek R1 Explained to your grandma - YouTube</a></li>
-        <li><a href="https://www.youtube.com/watch?v=XMnxKGVnEUc" target="_blank">Paper: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning - YouTube</a></li>
-        <li><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf" target="_blank">DeepSeek R1 Paper</a></li>
-    </ul>
-    
-    <h2>To Be Continued...</h2>
-    <p>This is just the beginning of the DeepSeek R1 exploration. Stay tuned for further insights and developments!</p>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek-R1: what group-relative rewards change — Yasaman Samiee</title><meta name="description" content="Distinguishing R1-Zero, R1, and distilled models in the original research.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>DeepSeek-R1: what group-relative rewards change</h1><p class="article-deck">Distinguishing R1-Zero, R1, and distilled models in the original research.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
+
+<p>This note concerns the original DeepSeek-R1 research release, not a comparison of current model rankings. The useful question is how a learning signal can be formed without a separate learned value model.</p>
+<h2>Keep the model names separate</h2>
+<p>R1-Zero applied reinforcement learning without a preliminary supervised fine-tuning stage. R1 introduced cold-start data and a multistage training pipeline to address usability and reasoning. Distilled models were trained from generated reasoning data using Qwen and Llama base families. These are distinct training setups, as described in the <a href="https://github.com/deepseek-ai/DeepSeek-R1">official repository</a>.</p>
+<h2>Compare responses to the same prompt</h2>
+<p>Group Relative Policy Optimization (GRPO) samples a group of outputs for one prompt and forms relative advantages from their rewards. In the original formulation, an output’s reward is centered by the group mean and scaled by the group standard deviation. The group provides the baseline rather than a separately learned critic.</p>
+<p>As a toy example, rewards [0, 0, 1, 1] have mean 0.5 and population standard deviation 0.5, producing normalized values [−1, −1, +1, +1]. This shows the comparison; it is not a complete training implementation. Equal rewards provide no within-group ranking signal, and numerical handling of zero variance matters.</p>
+<h2>The reward still sets the target</h2>
+<p>A relative score cannot make a flawed reward trustworthy. A format checker can reward formatting while missing a wrong answer. KL regularization discourages departure from a reference policy, but does not guarantee prevention of reward hacking.</p>
+<p class="source-note">Method reference: <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 paper</a>. The arithmetic example is illustrative.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>

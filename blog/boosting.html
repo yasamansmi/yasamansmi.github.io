@@ -1,171 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boosting and Gradient Boosting Explained</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        p {
-            color: #555;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        .note {
-            background: #fff8e1;
-            padding: 10px;
-            border-left: 4px solid #ff9800;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <h1>Boosting and Gradient Boosting: A Comprehensive Guide</h1>
-    
-    <h2>1. What is Boosting?</h2>
-    <p>Boosting is an ensemble learning technique that converts weak learners into strong ones by sequentially training models. Each new model corrects the errors of the previous one.</p>
-    <div class="note">
-        <strong>Note:</strong> Unlike Random Forests, which train trees in parallel, boosting trains trees sequentially.
-    </div>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boosting: correcting predictions and handling missing values — Yasaman Samiee</title><meta name="description" content="A small regression example, plus the difference between learned missing-value routes and imputation.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Featured explanation</p><h1>Boosting: correcting predictions and handling missing values</h1><p class="article-deck">A small regression example, plus the difference between learned missing-value routes and imputation.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
 
-    <h2>2. Gradient Boosting (GBDT)</h2>
-    <p>Gradient Boosted Decision Trees (GBDT) is a boosting technique that optimizes a loss function by using gradient descent.</p>
-    <p>Key idea: Each tree is trained to correct the residual errors of the previous tree.</p>
-
-    <h3>Steps in GBDT:</h3>
-    <ol>
-        <li>Start with an initial prediction (often the mean of the target variable).</li>
-        <li>Calculate residual errors (difference between actual and predicted values).</li>
-        <li>Train a weak learner (e.g., decision tree) to predict the residuals.</li>
-        <li>Update predictions using the weak learner’s output.</li>
-        <li>Repeat the process for multiple iterations.</li>
-    </ol>
-
-    <h2>3. XGBoost: Extreme Gradient Boosting</h2>
-    <p>XGBoost is an optimized implementation of gradient boosting with improvements in speed and accuracy.</p>
-
-    <h3>Key Features:</h3>
-    <ul>
-        <li>**Parallel processing**: Unlike traditional boosting, XGBoost can build trees in parallel.</li>
-        <li>**Regularization**: Includes L1 and L2 regularization to prevent overfitting.</li>
-        <li>**Optimized split finding**: Uses a histogram-based approach for faster computations.</li>
-        <li>**Handling missing values**: XGBoost automatically learns best missing value imputation.</li>
-    </ul>
-
-    <h3>Mathematical Formulation:</h3>
-    <p>The objective function in XGBoost consists of two parts:</p>
-    <p><code>Objective = Loss Function + Regularization</code></p>
-
-    <h4>1. Loss Function</h4>
-    <p>The loss function measures the difference between predicted and actual values. For squared loss:</p>
-    <p>\[
-    L(y, \hat{y}) = \sum (y_i - \hat{y}_i)^2
-    \]</p>
-
-    <h4>2. Regularization Term</h4>
-    <p>To control complexity, XGBoost adds a regularization term:</p>
-    <p>\[
-    \Omega(f) = \gamma T + \frac{1}{2} \lambda ||w||^2
-    \]</p>
-    <p>where:</p>
-    <ul>
-        <li>\(\gamma T\) controls the number of leaves in the tree.</li>
-        <li>\(\lambda\) penalizes large weights to prevent overfitting.</li>
-    </ul>
-
-    <h3>4. Decision Tree Splitting in XGBoost</h3>
-    <p>When deciding where to split a feature, XGBoost uses a **gain scoring function**:</p>
-    <p>\[
-    Gain = \frac{1}{2} \left[ \frac{G_L^2}{H_L + \lambda} + \frac{G_R^2}{H_R + \lambda} - \frac{(G_L + G_R)^2}{H_L + H_R + \lambda} \right] - \gamma
-    \]</p>
-    <p>where:</p>
-    <ul>
-        <li>\(G\) = Gradient (how much we need to adjust predictions).</li>
-        <li>\(H\) = Hessian (second derivative, measuring confidence in adjustments).</li>
-        <li>\(\gamma\) = Regularization parameter.</li>
-    </ul>
-    
-    <h3>5. Stopping Criteria in XGBoost</h3>
-    <p>To prevent overfitting, XGBoost stops training based on:</p>
-    <ul>
-        <li>**Maximum tree depth**: Limits complexity.</li>
-        <li>**Minimum gain requirement**: Ensures a split adds value.</li>
-        <li>**Minimum samples per leaf**: Avoids small, unreliable splits.</li>
-    </ul>
-
-    <h2>6. Boosting vs. Bagging (Random Forest)</h2>
-    <p>While both are ensemble techniques, they have key differences:</p>
-
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Feature</th>
-            <th>Boosting (GBDT, XGBoost)</th>
-            <th>Bagging (Random Forest)</th>
-        </tr>
-        <tr>
-            <td>Training</td>
-            <td>Sequential</td>
-            <td>Parallel</td>
-        </tr>
-        <tr>
-            <td>Goal</td>
-            <td>Reduce bias and underfitting</td>
-            <td>Reduce variance and overfitting</td>
-        </tr>
-        <tr>
-            <td>Tree Depth</td>
-            <td>Shallow trees (stumps)</td>
-            <td>Deep trees</td>
-        </tr>
-        <tr>
-            <td>Final Prediction</td>
-            <td>Weighted sum of trees</td>
-            <td>Majority vote (classification) or average (regression)</td>
-        </tr>
-    </table>
-
-    <h2>7. Logistic Regression vs. Tree-Based Models</h2>
-    <p>Logistic Regression is often compared to decision trees for classification tasks.</p>
-
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Feature</th>
-            <th>Logistic Regression</th>
-            <th>Tree-Based Models</th>
-        </tr>
-        <tr>
-            <td>Model Type</td>
-            <td>Linear</td>
-            <td>Non-linear</td>
-        </tr>
-        <tr>
-            <td>Prediction Type</td>
-            <td>Probability</td>
-            <td>Probability or class label</td>
-        </tr>
-        <tr>
-            <td>Loss Function</td>
-            <td>Log Loss</td>
-            <td>Log Loss, MSE, MAE</td>
-        </tr>
-    </table>
-
-    <h2>Conclusion</h2>
-    <p>Boosting, particularly XGBoost, is a powerful technique for predictive modeling. Understanding its principles, advantages, and regularization techniques helps in building efficient and accurate models.</p>
-
-</body>
-</html>
+<p>Boosting builds a prediction in stages. To make that concrete, start with three fictional regression targets: 10, 20, and 30. A constant prediction of 20 leaves residuals of −10, 0, and +10.</p>
+<h2>One update, not a complete model</h2>
+<p>For squared-error loss, a new tree can be fit to these residuals using the input features. Suppose its predictions are −8, −2, and +8. With a learning rate of 0.10, the updated predictions become 19.2, 19.8, and 20.8:</p>
+<pre><code>updated prediction = current prediction + learning rate × tree output</code></pre>
+<p>The sum of squared errors falls from 200 to 169.32: 84.64 + 0.04 + 84.64. This toy update illustrates the direction of improvement; it does not demonstrate generalization to unseen data.</p>
+<h2>Residual fitting is a special case</h2>
+<p>For other differentiable losses, gradient boosting follows negative loss gradients rather than ordinary target-minus-prediction residuals. XGBoost also uses second-order information in its tree objective and penalizes model complexity. Boosting rounds depend on earlier rounds; parallel split-finding does not remove that dependency. See the <a href="https://xgboost.readthedocs.io/en/stable/tutorials/model.html">XGBoost model tutorial</a>.</p>
+<h2>Missing values take a learned route</h2>
+<p>For tree models, XGBoost learns a default branch for missing values at a split. It does not need to fill every missing entry with an estimated numeric value. This distinction is documented in the <a href="https://xgboost.readthedocs.io/en/stable/faq.html">XGBoost FAQ</a>.</p>
+<p>Imagine a feature measuring days since the last purchase. Missing might mean “new customer,” a failed data join, or a tracking outage. A tree may use that pattern successfully during training while failing when the meaning of missingness changes. Native support for missing values is not a substitute for understanding their source.</p>
+<h2>What I would compare before choosing a model</h2>
+<p>Start with a simple baseline and a split that matches the intended use. For forecasting future behavior, a random split can hide time-related leakage. Fit preprocessing only on training data and keep a final test set separate from early-stopping decisions.</p>
+<p>Compare the baseline, a bagged tree model, and boosted trees on the same validation cases. Look at error by meaningful segment, training-versus-validation gaps, and behavior when key features are missing. Learning rate, tree depth, and the number of boosting rounds interact; a stronger fit to training data is not the goal by itself.</p>
+<p>Bagging combines models trained on resampled data and is often used to reduce variance. Boosting adds models sequentially to improve an objective. Both can overfit, and neither removes the need for a defensible evaluation design.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>

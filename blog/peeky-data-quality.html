@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peeky Data: making CSV summaries harder to misread — Yasaman Samiee</title><meta name="description" content="Preserving identifiers, defining missing values, and testing the arithmetic behind a dashboard.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Project notes</p><h1>Peeky Data: making CSV summaries harder to misread</h1><p class="article-deck">Preserving identifiers, defining missing values, and testing the arithmetic behind a dashboard.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
+
+<p>A CSV explorer can produce a polished table and still mislead its reader. A value such as <code>001</code> may be an identifier, an empty field may mean unknown, and a repeated row may represent a real repeated event. Peeky Data makes those assumptions visible instead of silently cleaning everything.</p>
+<h2>Preserve the uploaded representation</h2>
+<p>The parser keeps nonblank cell text, including leading zeros. Numeric analysis uses a separate conversion: every nonblank value must parse, and leading-zero integer strings stay text. A mixed column remains text. This is a conservative heuristic, not semantic type detection; an identifier without leading zeros can still look numeric.</p>
+<p>Only blank and whitespace-only cells count as missing. Literal <code>NA</code> and <code>N/A</code> remain categories. A different dataset may need a different missing-value policy, which is why the report describes the rule rather than presenting it as universally correct.</p>
+<h2>Use the same values for every numeric view</h2>
+<p>The original implementation could detect numeric-looking text and later attempt to bin the unconverted column. The analysis now uses the same conversion helper for numeric statistics and distributions. Infinite values are counted explicitly and excluded from those calculations.</p>
+<p>Another issue was a “Top 5” display showing the first five ordered intervals. The revised dashboard shows all ten intervals for numeric columns with more than ten distinct finite values. Other columns show the five most frequent values, with percentages calculated over all eligible values—not just the displayed five.</p>
+<h2>Make the assumptions testable</h2>
+<p>A fictional sample contains 15 rows, six columns, four missing cells, and one repeated row after its first occurrence. Those expected values provide a quick check that the dashboard and analysis agree.</p>
+<p>The test suite also exercises broken quoting, inconsistent row lengths, duplicate headers, UTF-8 encoding, upload limits, numeric strings, all-infinite columns, undefined standard deviations, and JSON export. The published revision passed 18 tests locally and in GitHub Actions.</p>
+<h2>Export findings, not automatic decisions</h2>
+<p>The downloadable JSON report includes counts, column statistics, methodology, and suggested checks. It contains no individual records, though column names and aggregate statistics can still be sensitive. Uploads are processed on the app server, so the public demo asks visitors to use non-sensitive data.</p>
+<p>Peeky Data does not decide whether to delete duplicates, fill missing values, or reject a dataset. The next useful extension would be explicit user-defined rules—such as allowed categories or a required unique ID—with failures reported separately from descriptive statistics.</p>
+<p class="source-note">Implementation and tests: <a href="https://github.com/yasamansmi/peeky-data/tree/12a70b2">Peeky Data revision 12a70b2</a>. <a href="https://peeky-data.streamlit.app/">Explore the sample</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>

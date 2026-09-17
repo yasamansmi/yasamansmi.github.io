@@ -1,117 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retrieval-Augmented Generation (RAG)</title>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            padding: 20px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Retrieval-Augmented Generation (RAG)</h1>
-    <p>Retrieval-Augmented Generation (RAG) is an AI technique that enhances generative language models by allowing them to fetch relevant information from external knowledge bases. This approach improves response accuracy and contextual understanding, making AI systems more reliable and informative.</p>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluating RAG: retrieval and answers are different problems — Yasaman Samiee</title><meta name="description" content="A worked evaluation example that separates missing evidence from unsupported answers.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Featured explanation</p><h1>Evaluating RAG: retrieval and answers are different problems</h1><p class="article-deck">A worked evaluation example that separates missing evidence from unsupported answers.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 3 min read</p></header>
 
-    <h2>How RAG Works</h2>
-    <p>RAG operates in two main steps, which together form a seamless process of retrieving relevant data and generating intelligent responses.</p>
-    <h3>1. Retrieval Step</h3>
-    <p>The AI first searches external databases, such as:</p>
-    <ul>
-        <li>Document repositories</li>
-        <li>APIs</li>
-        <li>Vector stores (e.g., FAISS, Pinecone)</li>
-        <li>Internet sources</li>
-    </ul>
-    <p>This retrieval process ensures that the model has access to up-to-date and domain-specific knowledge, making its responses more accurate.</p>
-    
-    <h3>2. Generation Step</h3>
-    <p>Once relevant information is retrieved, it is fed into the language model as additional context. The model then generates responses based on both retrieved knowledge and learned patterns. This allows the system to integrate real-time information with its pre-trained knowledge base.</p>
-
-    <h2>Building a RAG Pipeline</h2>
-    <p>To implement an efficient RAG system, a combination of technologies and methodologies is required. The pipeline generally includes:</p>
-    <ul>
-        <li>Large Language Models (LLMs) for text generation</li>
-        <li>Vector Databases (e.g., FAISS, Pinecone) for efficient storage and retrieval of information</li>
-        <li>Embedding models (e.g., OpenAI's <code>text-embedding-ada-002</code> or BERT) for vector representation of data</li>
-        <li>Search systems optimized for vector retrieval</li>
-    </ul>
-
-    <h2>Vector Databases and Their Role</h2>
-    <p>Vector databases are an essential part of RAG, as they allow for efficient information retrieval using numerical representations of text and other data types.</p>
-    <h3>Key Features</h3>
-    <ul>
-        <li><strong>Data Representation:</strong> Converts text, image, or audio into high-dimensional vectors using models like BERT.</li>
-        <li><strong>Indexing:</strong> Uses techniques such as Approximate Nearest Neighbors (ANN) for fast searches.</li>
-        <li><strong>Querying:</strong> Compares vector similarities using metrics like cosine similarity, dot product, or Euclidean distance.</li>
-    </ul>
-    <p>Once data is efficiently stored and retrieved, it needs to be converted into a format that can be understood by the language model. This leads us to Byte Pair Encoding (BPE), an essential technique for tokenizing text.</p>
-
-    <h2>Byte Pair Encoding (BPE)</h2>
-    <p>BPE is an important method used in tokenization, particularly in OpenAI’s tokenizer. Unlike traditional word tokenization, BPE follows a three-step process:</p>
-    <ol>
-        <li>Starts with characters.</li>
-        <li>Merges the most frequent character pairs into subwords.</li>
-        <li>Continues merging until the optimal vocabulary size is reached.</li>
-    </ol>
-    <p>Once tokens are generated, they are transformed into numerical embeddings. This process is crucial in training machine learning models.</p>
-
-    <h2>Word Embeddings</h2>
-    <p>Word embeddings are the backbone of modern NLP models. Each token is mapped to a pre-trained word vector—a lower-dimensional representation of words. For instance:</p>
-    <p>
-        <code>Machine → [10.21, 0.34, 1.02, ...] (1536-dimensional vector)</code>
-    </p>
-    <p>Each feature dimension captures different semantic, syntactic, or contextual properties of the word.</p>
-
-    <h2>Generating Word Embeddings</h2>
-    <p>There are several steps involved in generating meaningful word embeddings:</p>
-    <ol>
-        <li><strong>Tokenization:</strong> Converts text into discrete tokens.</li>
-        <li><strong>Contextual Processing:</strong> Uses static (e.g., Word2Vec, GloVe) or contextual (e.g., BERT) embeddings.</li>
-        <li><strong>Projection:</strong> Maps tokens into a vector space using deep neural networks.</li>
-    </ol>
-
-    <h2>Word2Vec: Static Word Embeddings</h2>
-    <p>One popular approach for static embeddings is Word2Vec, which learns word representations in two ways:</p>
-    <h3>1. Skip-gram Model</h3>
-    <p>Predicts context words from a target word by maximizing:</p>
-    <p>
-        \[ \sum \log P(context | target) \]
-    </p>
-    <h3>2. Continuous Bag of Words (CBOW)</h3>
-    <p>Predicts the target word from surrounding context words.</p>
-    <p>Now that we understand how words are embedded, we need a way to classify and evaluate probabilities in NLP tasks. This is where the Softmax function comes into play.</p>
-
-    <h2>Softmax Function</h2>
-    <p>Softmax converts a vector of real numbers into a probability distribution:</p>
-    <p>
-        \[ softmax(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}} \]
-    </p>
-    <p>Properties:</p>
-    <ul>
-        <li>All outputs range between 0 and 1.</li>
-        <li>Sum of all probabilities equals 1.</li>
-        <li>Larger values get higher probabilities.</li>
-    </ul>
-
-    <h2>Cross-Entropy Loss</h2>
-    <p>Cross-entropy measures the difference between two probability distributions and is crucial in classification problems:</p>
-    <p>
-        \[ L = - \sum y_i \log \hat{y}_i \]
-    </p>
-    <p>In classification tasks, \( y \) represents the true class label, while \( \hat{y} \) represents the predicted probability.</p>
-
-    <h2>Conclusion</h2>
-    <p>Retrieval-Augmented Generation (RAG) is a powerful AI technique that bridges the gap between information retrieval and text generation. By integrating vector databases, embedding models, and neural architectures, RAG enhances the ability of AI models to provide accurate and contextually relevant responses.</p>
-</body>
-</html>
+<p>A retrieval-augmented answer can sound convincing while failing in two different ways: the system may retrieve the wrong evidence, or it may misread the right evidence. A single answer-quality score hides that distinction.</p>
+<h2>Start with a question whose answer can be checked</h2>
+<p>Consider a fictional returns assistant. A customer asks: “Can I return a sale item after 20 days?” The current policy says sale items have a 14-day window; full-price items have 30 days. An older policy allowed 30 days for everything.</p>
+<p>The test case needs more than a reference answer. Record the relevant policy passage, its effective date, the expected answer, and whether the question is answerable from the available documents. This makes a failure diagnosable.</p>
+<h2>Check retrieval before changing the prompt</h2>
+<p>Suppose the retriever returns five passages, including the old policy and several generic returns pages, but misses the current sale-item clause. A more forceful instruction to “be accurate” does not repair that missing evidence.</p>
+<p>For a small illustrative evaluation set of 20 questions with one labeled supporting passage each, retrieving that passage for 16 questions gives a hit rate at five of 16/20 = 80%. These are example numbers, not benchmark results. When questions need multiple passages, measure evidence coverage too: finding one clause may not be enough.</p>
+<p>Inspect misses by cause: outdated documents, poor chunk boundaries, ambiguous wording, permission filters, or ranking. Change one part of retrieval, then rerun the same cases. A keyword baseline is useful; a vector database is not a requirement for every retrieval system.</p>
+<h2>Then evaluate the answer against its evidence</h2>
+<div class="table-scroll"><table><caption>Diagnosing the fictional returns example</caption><thead><tr><th>Retrieved evidence</th><th>Answer</th><th>What to investigate</th></tr></thead><tbody><tr><td>Current 14-day clause</td><td>“Yes, within 30 days”</td><td>Generation contradicts its evidence.</td></tr><tr><td>Only the old policy</td><td>“Yes, within 30 days”</td><td>Retrieval freshness; a fluent answer is still wrong.</td></tr><tr><td>No relevant policy</td><td>“I cannot confirm from these documents”</td><td>Appropriate uncertainty; investigate the retrieval miss separately.</td></tr></tbody></table></div>
+<p>Score correctness, support for individual claims, and citation accuracy separately. Include questions the corpus cannot answer. Otherwise a system that always produces an answer may look stronger than one that recognizes missing evidence.</p>
+<h2>A small evaluation plan</h2>
+<p>Freeze a representative question set, label supporting evidence, and compare retrieval configurations before tuning generation. Review failures manually, especially conflicting policies and questions requiring multiple facts. Track latency and cost alongside quality. More retrieved text can add irrelevant or contradictory material.</p>
+<p>The design principle is to keep evidence availability separate from evidence use. That makes the next engineering step specific: repair the index, change retrieval, or improve how the answer uses the context.</p>
+<p class="source-note">Background: <a href="https://arxiv.org/abs/2005.11401">Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>. The returns scenario and evaluation plan above are illustrative, not results from that paper.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>

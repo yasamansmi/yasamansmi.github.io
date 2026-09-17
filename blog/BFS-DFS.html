@@ -1,204 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BFS and DFS Explained</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; padding: 20px; }
-        h1, h2 { color: #2C3E50; }
-        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
-        code { font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
-</head>
-<body>
-    <h1>Breadth-First Search (BFS) and Depth-First Search (DFS) Explained</h1>
-    
-    <h2>1. What is a Graph?</h2>
-    <p>A <strong>graph</strong> is a data structure consisting of <strong>nodes</strong> (also called vertices) and <strong>edges</strong> (connections between nodes).</p>
-    <ul>
-        <li><strong>Node (Vertex)</strong>: An entity like a person in a social network, a webpage on the internet, or a metro station.</li>
-        <li><strong>Edge</strong>: A connection between two nodes. It can be:</li>
-        <ul>
-            <li><strong>Undirected</strong>: Two-way connection.</li>
-            <li><strong>Directed</strong>: One-way connection.</li>
-        </ul>
-    </ul>
-    
-    <h2>2. What is BFS (Breadth-First Search)?</h2>
-    <p><strong>BFS</strong> is an algorithm for traversing a graph <strong>level by level</strong>. It explores all neighbors of a node before moving to the next level.</p>
-    
-    <h3>How BFS Works:</h3>
-    <pre>
-    1. Create a queue (FIFO) and enqueue the starting node.
-    2. Mark the node as visited.
-    3. While the queue is not empty:
-        - Dequeue a node.
-        - Process the node.
-        - Enqueue all its unvisited neighbors.
-    </pre>
-    
-    <h3>BFS Pseudocode:</h3>
-    <pre>
-    create a queue Q
-    mark the start node as visited and enqueue it
-    while Q is not empty:
-        remove the head of Q
-        mark and enqueue all unvisited neighbors
-    </pre>
-    
-    <h3>Python Implementation of BFS (Level Order Traversal)</h3>
-    <pre>
-    from collections import deque
-    
-    class TreeNode:
-        def __init__(self, val=0, left=None, right=None):
-            self.val = val
-            self.left = left
-            self.right = right
-    
-    class Solution:
-        def levelOrder(self, root):
-            if not root:
-                return []
-            
-            result = []
-            queue = deque([root])
-            
-            while queue:
-                level_values = []
-                for _ in range(len(queue)):
-                    node = queue.popleft()
-                    level_values.append(node.val)
-                    
-                    if node.left:
-                        queue.append(node.left)
-                    if node.right:
-                        queue.append(node.right)
-                
-                result.append(level_values)
-            
-            return result
-    </pre>
-    
-    <h3>Example of Level Order Traversal (BFS in Trees)</h3>
-    <pre>
-    Input:        3
-               /   \
-              9    20
-                  /   \
-                 15    7
-    </pre>
-    
-    <h3>BFS Complexity:</h3>
-    <p>The time complexity of BFS is <code>O(V + E)</code>, where:</p>
-    <ul>
-        <li><code>V</code> is the number of vertices (nodes).</li>
-        <li><code>E</code> is the number of edges.</li>
-    </ul>
-    
-    <h2>3. What is DFS (Depth-First Search)?</h2>
-    <p><strong>DFS</strong> is an algorithm that explores a path <strong>deeply before backtracking</strong>. It follows one branch until there are no more nodes, then backtracks.</p>
-    
-    <h3>How DFS Works:</h3>
-    <pre>
-    1. Start from the root node.
-    2. Mark the node as visited.
-    3. Explore the left child (if exists), then the right child.
-    4. If a node has no children, backtrack.
-    </pre>
-    
-    <h3>DFS Complexity:</h3>
-    <p>The time complexity of DFS is <code>O(V + E)</code>, same as BFS.</p>
-    
-    <h2>4. Recursive Functions</h2>
-    <p>A <strong>recursive function</strong> is a function that calls itself until a base case is met.</p>
-    <h3>Structure of a Recursive Function:</h3>
-    <ol>
-        <li><strong>Base Case</strong>: The condition where recursion stops.</li>
-        <li><strong>Recursive Case</strong>: The function calls itself with a modified parameter.</li>
-    </ol>
-    
-    <h3>Example 1: Countdown Function</h3>
-    <pre>
-    def countdown(n):
-        if n == 0:
-            print("Done!")
-            return
-        print(n)
-        countdown(n - 1)
-    </pre>
-    
-    <h3>Example 2: Factorial Calculation</h3>
-    <pre>
-    def factorial(n):
-        if n == 1:
-            return 1
-        return n * factorial(n - 1)
-    </pre>
-    
-    <h3>Example 3: Fibonacci Sequence</h3>
-    <pre>
-    def fibonacci(n):
-        if n == 0:
-            return 0
-        if n == 1:
-            return 1
-        return fibonacci(n - 1) + fibonacci(n - 2)
-    </pre>
-    
-    <h2>5. BFS vs. DFS: Space Complexity Comparison</h2>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Scenario</th>
-            <th>BFS Space Complexity</th>
-            <th>DFS Space Complexity</th>
-        </tr>
-        <tr>
-            <td>Balanced Binary Tree</td>
-            <td>O(V)</td>
-            <td>O(log V)</td>
-        </tr>
-        <tr>
-            <td>Deep Skewed Tree</td>
-            <td>O(V)</td>
-            <td>O(V)</td>
-        </tr>
-        <tr>
-            <td>Graph (Worst Case)</td>
-            <td>O(V)</td>
-            <td>O(V)</td>
-        </tr>
-    </table>
-    
-    <h2>BFS vs. DFS: Summary</h2>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Aspect</th>
-            <th>BFS</th>
-            <th>DFS</th>
-        </tr>
-        <tr>
-            <td>Data Structure</td>
-            <td>Queue (FIFO)</td>
-            <td>Stack (LIFO) or Recursion</td>
-        </tr>
-        <tr>
-            <td>Best for</td>
-            <td>Finding the shortest path</td>
-            <td>Exploring deep paths first</td>
-        </tr>
-        <tr>
-            <td>Time Complexity</td>
-            <td>O(V + E)</td>
-            <td>O(V + E)</td>
-        </tr>
-    </table>
-    
-    <h2>Conclusion</h2>
-    <p>Both BFS and DFS are fundamental graph traversal algorithms used in different scenarios. BFS is best for level-wise searching, while DFS is better for deep exploration. Understanding their space complexity and applications can help choose the right algorithm for a given problem.</p>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BFS and DFS: choose by the search you need — Yasaman Samiee</title><meta name="description" content="Shortest paths in unweighted graphs, traversal order, and memory on different tree shapes.">
+<link rel="stylesheet" href="/style.css?v=20260917-writing"></head>
+<body class="article-page"><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="article-nav"><a href="/">Yasaman Samiee</a><nav aria-label="Portfolio"><a href="/writing.html">All writing</a><a href="/cv/">Résumé</a></nav></header>
+<main id="main-content" class="article-body"><article><header><p class="eyebrow">Learning notes</p><h1>BFS and DFS: choose by the search you need</h1><p class="article-deck">Shortest paths in unweighted graphs, traversal order, and memory on different tree shapes.</p><p class="article-meta">Yasaman Samiee · Updated <time datetime="2026-09-17">September 17, 2026</time> · 2 min read</p></header>
+
+<p>Breadth-first search explores vertices by distance from a starting point. Depth-first search follows a branch before backtracking. Both need a visited set on general graphs to avoid repeatedly traversing cycles.</p>
+<h2>A minimal graph BFS</h2>
+<pre><code>from collections import deque
+
+def distances(graph, start):
+    distance = {start: 0}
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        for neighbor in graph.get(node, []):
+            if neighbor not in distance:
+                distance[neighbor] = distance[node] + 1
+                queue.append(neighbor)
+    return distance</code></pre>
+<p>Marking a vertex when it enters the queue prevents duplicate enqueues. For <code>A → B, A → C, B → D, C → D</code>, the distances from A are 0, 1, 1, and 2. The same approach works with cycles because previously discovered vertices are skipped.</p>
+<h2>Distance depends on the edge model</h2>
+<p>BFS finds shortest paths by number of edges in an unweighted graph. It does not generally minimize unequal edge costs. DFS is useful for exploration and as a component of algorithms such as cycle detection, but its first discovered path need not be shortest.</p>
+<h2>Time and space</h2>
+<p>With adjacency lists, both traversals take O(V + E) time over the reachable graph. A visited set may use O(V) memory. On a tree without a visited set, BFS frontier memory depends on width, while recursive DFS stack memory depends on height. A chain has constant-width BFS frontier and an O(V) DFS stack; a balanced binary tree reverses much of that memory tradeoff.</p>
+<p class="source-note">Reference implementation and discussion: <a href="https://algs4.cs.princeton.edu/41graph/">Princeton Algorithms: undirected graphs</a>.</p></article><footer class="portfolio-footer"><a href="/writing.html">← All writing</a><a href="/">Selected work</a></footer></main></body></html>
