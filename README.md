@@ -7,6 +7,8 @@ Focus: production machine learning, marketplace decision systems, experimentatio
 ## Contents
 
 - `index.html` and `style.css`: portfolio and selected professional/independent work
+- `writing.html`: technical notes index
+- `earlier-projects.html`: earlier learning projects
 - `cv/`: career overview
 - `blog/`: technical learning notes
 
